@@ -1,0 +1,17 @@
+<RCC>
+  <qresource prefix="newPrefix">
+    <file>assets/product.png</file>
+    <file>assets/product-white.png</file>
+    <file>assets/down-arrow.png</file>
+    <file>assets/search.png</file>
+    <file>assets/logo.png</file>
+    <file>assets/client.png</file>
+    <file>assets/client-white.png</file>
+    <file>assets/dollor.png</file>
+    <file>assets/dollor-white.png</file>
+    <file>assets/list.png</file>
+    <file>assets/list-white.png</file>
+    <file>assets/savdo.png</file>
+    <file>assets/savdo-white.png</file>
+  </qresource>
+</RCC>
