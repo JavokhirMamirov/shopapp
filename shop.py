@@ -2,6 +2,7 @@ import sys
 from PyQt5.QtWidgets import QMainWindow, QApplication, QPushButton
 from ux import main_ux
 from libs.extra_functions import MENU_SELECTED_STYLESHEET, InsertItemToTable, TableStretchAndHide
+from components import add_client
 
 class ShopApp(QMainWindow, main_ux.Ui_MainWindow):
     def __init__(self, *args, **kwargs):
@@ -12,6 +13,13 @@ class ShopApp(QMainWindow, main_ux.Ui_MainWindow):
         self.main_stack.currentChanged.connect(self.PageChanged)
         self.menuButtonClicked()
         self.tableWidgetSettings()
+        self.pushButton_5.clicked.connect(self.openAddClientWindow)
+
+    
+
+    def openAddClientWindow(self):
+        window = add_client.AddClientWindow()
+        window.show()
 
 
     def menuButtonClicked(self):
