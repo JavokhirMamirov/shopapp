@@ -179,12 +179,11 @@
              <cursorShape>PointingHandCursor</cursorShape>
             </property>
             <property name="styleSheet">
-             <string notr="true">#btn_savdo{
+             <string notr="true">QPushButton{
 	background-image: url(:/newPrefix/assets/savdo.png);
 }
 
-#btn_savdo:hover{
-	
+QPushButton:hover{
 	background-image: url(:/newPrefix/assets/savdo-white.png);
 }</string>
             </property>
@@ -199,12 +198,11 @@
              <cursorShape>PointingHandCursor</cursorShape>
             </property>
             <property name="styleSheet">
-             <string notr="true">#btn_client{
+             <string notr="true">QPushButton{
 	background-image: url(:/newPrefix/assets/client.png);
 }
 
-#btn_client:hover{
-	
+QPushButton:hover{
 	background-image: url(:/newPrefix/assets/client-white.png);
 }</string>
             </property>
@@ -219,12 +217,12 @@
              <cursorShape>PointingHandCursor</cursorShape>
             </property>
             <property name="styleSheet">
-             <string notr="true">#btn_product{
+             <string notr="true">QPushButton{
 	background-image: url(:/newPrefix/assets/product.png);
 }
 
 
-#btn_product:hover{
+QPushButton:hover{
 	background-image: url(:/newPrefix/assets/product-white.png);
 }</string>
             </property>
@@ -239,15 +237,11 @@
              <cursorShape>PointingHandCursor</cursorShape>
             </property>
             <property name="styleSheet">
-             <string notr="true">#btn_savdolar{
+             <string notr="true">QPushButton{
 	background-image: url(:/newPrefix/assets/list.png);
-	background-repeat:no-repit;
-	background-attachment: fixed;
-  	background-position-y: left;
-	background-position-x: center;
 }
 
-#btn_savdolar:hover{
+QPushButton:hover{
 	background-image: url(:/newPrefix/assets/list-white.png);
 }</string>
             </property>
@@ -262,12 +256,12 @@
              <cursorShape>PointingHandCursor</cursorShape>
             </property>
             <property name="styleSheet">
-             <string notr="true">#btn_dollor{
+             <string notr="true">QPushButton{
 	background-image: url(:/newPrefix/assets/dollor.png);
 }
 
 
-#btn_dollor:hover{
+QPushButton:hover{
 	background-image: url(:/newPrefix/assets/dollor-white.png);
 }</string>
             </property>
@@ -725,6 +719,7 @@ color:#fff;
 	border-collapse: collapse;
 	
 }
+
 QHeaderView::section {
     background-color: #006CFE;
     padding: 4px;
@@ -797,12 +792,20 @@ QScrollBar:vertical {
              <attribute name="horizontalHeaderVisible">
               <bool>false</bool>
              </attribute>
+             <attribute name="horizontalHeaderDefaultSectionSize">
+              <number>130</number>
+             </attribute>
              <attribute name="horizontalHeaderStretchLastSection">
               <bool>false</bool>
              </attribute>
              <attribute name="verticalHeaderVisible">
               <bool>false</bool>
              </attribute>
+             <column>
+              <property name="text">
+               <string>id</string>
+              </property>
+             </column>
              <column>
               <property name="text">
                <string>№</string>
@@ -959,6 +962,9 @@ QPushButton:hover{
        </layout>
       </widget>
       <widget class="QWidget" name="page_client">
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
        <layout class="QVBoxLayout" name="verticalLayout_14">
         <property name="spacing">
          <number>0</number>
@@ -1132,6 +1138,9 @@ color:#797979;
                <pointsize>18</pointsize>
               </font>
              </property>
+             <property name="cursor">
+              <cursorShape>PointingHandCursor</cursorShape>
+             </property>
              <property name="styleSheet">
               <string notr="true">
 QPushButton{
@@ -1263,10 +1272,10 @@ QScrollBar:vertical {
               <number>0</number>
              </property>
              <attribute name="horizontalHeaderVisible">
-              <bool>false</bool>
+              <bool>true</bool>
              </attribute>
              <attribute name="horizontalHeaderDefaultSectionSize">
-              <number>250</number>
+              <number>200</number>
              </attribute>
              <attribute name="horizontalHeaderStretchLastSection">
               <bool>false</bool>
@@ -1274,6 +1283,11 @@ QScrollBar:vertical {
              <attribute name="verticalHeaderVisible">
               <bool>false</bool>
              </attribute>
+             <column>
+              <property name="text">
+               <string>id</string>
+              </property>
+             </column>
              <column>
               <property name="text">
                <string>№</string>
@@ -1586,6 +1600,11 @@ QScrollBar:vertical {
              </attribute>
              <column>
               <property name="text">
+               <string>id</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
                <string>№</string>
               </property>
              </column>
@@ -1617,16 +1636,16 @@ QScrollBar:vertical {
          <number>0</number>
         </property>
         <property name="leftMargin">
-         <number>25</number>
+         <number>0</number>
         </property>
         <property name="topMargin">
-         <number>10</number>
+         <number>0</number>
         </property>
         <property name="rightMargin">
-         <number>20</number>
+         <number>0</number>
         </property>
         <property name="bottomMargin">
-         <number>10</number>
+         <number>0</number>
         </property>
         <item>
          <widget class="QFrame" name="frame_12">
@@ -1927,6 +1946,11 @@ QScrollBar:vertical {
              <attribute name="verticalHeaderVisible">
               <bool>false</bool>
              </attribute>
+             <column>
+              <property name="text">
+               <string>id</string>
+              </property>
+             </column>
              <column>
               <property name="text">
                <string>№</string>
@@ -2821,6 +2845,11 @@ QScrollBar:vertical {
              <attribute name="verticalHeaderVisible">
               <bool>false</bool>
              </attribute>
+             <column>
+              <property name="text">
+               <string>id</string>
+              </property>
+             </column>
              <column>
               <property name="text">
                <string>№</string>
