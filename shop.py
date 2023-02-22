@@ -13,13 +13,19 @@ class ShopApp(QMainWindow, main_ux.Ui_MainWindow):
         self.main_stack.currentChanged.connect(self.PageChanged)
         self.menuButtonClicked()
         self.tableWidgetSettings()
+        self.addClientWindow = add_client.AddClientWindow(self)
         self.pushButton_5.clicked.connect(self.openAddClientWindow)
 
     
+    def connectDatabase(self):
+        conn = psycopg2.connect(
+            host="localhost",
+            database="suppliers",
+            user="postgres",
+            password="Abcd1234")
 
     def openAddClientWindow(self):
-        window = add_client.AddClientWindow()
-        window.show()
+        self.addClientWindow.exec()
 
 
     def menuButtonClicked(self):

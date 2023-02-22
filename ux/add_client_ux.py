@@ -11,38 +11,31 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_Form(object):
-    def setupUi(self, Form):
-        Form.setObjectName("Form")
-        Form.resize(400, 381)
-        Form.setMinimumSize(QtCore.QSize(400, 0))
-        Form.setMaximumSize(QtCore.QSize(400, 16777215))
-        icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap(":/newPrefix/assets/client.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        Form.setWindowIcon(icon)
-        Form.setStyleSheet("#Form{\n"
-"    \n"
-"    background-color: rgb(255, 255, 255);\n"
-"}")
-        self.verticalLayout_4 = QtWidgets.QVBoxLayout(Form)
-        self.verticalLayout_4.setObjectName("verticalLayout_4")
-        self.verticalLayout = QtWidgets.QVBoxLayout()
-        self.verticalLayout.setObjectName("verticalLayout")
-        self.label = QtWidgets.QLabel(Form)
-        self.label.setMinimumSize(QtCore.QSize(0, 30))
-        self.label.setMaximumSize(QtCore.QSize(16777215, 30))
+class Ui_Dialog(object):
+    def setupUi(self, Dialog):
+        Dialog.setObjectName("Dialog")
+        Dialog.resize(400, 380)
+        Dialog.setMinimumSize(QtCore.QSize(400, 0))
+        Dialog.setMaximumSize(QtCore.QSize(400, 16777215))
+        self.verticalLayout_10 = QtWidgets.QVBoxLayout(Dialog)
+        self.verticalLayout_10.setObjectName("verticalLayout_10")
+        self.verticalLayout_8 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_8.setObjectName("verticalLayout_8")
+        self.label_8 = QtWidgets.QLabel(Dialog)
+        self.label_8.setMinimumSize(QtCore.QSize(0, 30))
+        self.label_8.setMaximumSize(QtCore.QSize(16777215, 30))
         font = QtGui.QFont()
         font.setPointSize(12)
-        self.label.setFont(font)
-        self.label.setObjectName("label")
-        self.verticalLayout.addWidget(self.label)
-        self.lineEdit = QtWidgets.QLineEdit(Form)
-        self.lineEdit.setMinimumSize(QtCore.QSize(0, 36))
-        self.lineEdit.setMaximumSize(QtCore.QSize(16777215, 36))
+        self.label_8.setFont(font)
+        self.label_8.setObjectName("label_8")
+        self.verticalLayout_8.addWidget(self.label_8)
+        self.lineEdit_8 = QtWidgets.QLineEdit(Dialog)
+        self.lineEdit_8.setMinimumSize(QtCore.QSize(0, 36))
+        self.lineEdit_8.setMaximumSize(QtCore.QSize(16777215, 36))
         font = QtGui.QFont()
         font.setPointSize(12)
-        self.lineEdit.setFont(font)
-        self.lineEdit.setStyleSheet("QLineEdit{\n"
+        self.lineEdit_8.setFont(font)
+        self.lineEdit_8.setStyleSheet("QLineEdit{\n"
 "    background-color: rgb(255, 255, 255);\n"
 "    border-radius:7px;\n"
 "    border:1px solid #333;\n"
@@ -53,26 +46,26 @@ class Ui_Form(object):
 "    border-radius:7px;\n"
 "    border:1px solid rgb(53, 132, 228);\n"
 "}")
-        self.lineEdit.setObjectName("lineEdit")
-        self.verticalLayout.addWidget(self.lineEdit)
-        self.verticalLayout_4.addLayout(self.verticalLayout)
-        self.verticalLayout_2 = QtWidgets.QVBoxLayout()
-        self.verticalLayout_2.setObjectName("verticalLayout_2")
-        self.label_2 = QtWidgets.QLabel(Form)
-        self.label_2.setMinimumSize(QtCore.QSize(0, 30))
-        self.label_2.setMaximumSize(QtCore.QSize(16777215, 30))
+        self.lineEdit_8.setObjectName("lineEdit_8")
+        self.verticalLayout_8.addWidget(self.lineEdit_8)
+        self.verticalLayout_10.addLayout(self.verticalLayout_8)
+        self.verticalLayout_7 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_7.setObjectName("verticalLayout_7")
+        self.label_7 = QtWidgets.QLabel(Dialog)
+        self.label_7.setMinimumSize(QtCore.QSize(0, 30))
+        self.label_7.setMaximumSize(QtCore.QSize(16777215, 30))
         font = QtGui.QFont()
         font.setPointSize(12)
-        self.label_2.setFont(font)
-        self.label_2.setObjectName("label_2")
-        self.verticalLayout_2.addWidget(self.label_2)
-        self.lineEdit_2 = QtWidgets.QLineEdit(Form)
-        self.lineEdit_2.setMinimumSize(QtCore.QSize(0, 36))
-        self.lineEdit_2.setMaximumSize(QtCore.QSize(16777215, 36))
+        self.label_7.setFont(font)
+        self.label_7.setObjectName("label_7")
+        self.verticalLayout_7.addWidget(self.label_7)
+        self.lineEdit_7 = QtWidgets.QLineEdit(Dialog)
+        self.lineEdit_7.setMinimumSize(QtCore.QSize(0, 36))
+        self.lineEdit_7.setMaximumSize(QtCore.QSize(16777215, 36))
         font = QtGui.QFont()
         font.setPointSize(12)
-        self.lineEdit_2.setFont(font)
-        self.lineEdit_2.setStyleSheet("QLineEdit{\n"
+        self.lineEdit_7.setFont(font)
+        self.lineEdit_7.setStyleSheet("QLineEdit{\n"
 "    background-color: rgb(255, 255, 255);\n"
 "    border-radius:7px;\n"
 "    border:1px solid #333;\n"
@@ -83,26 +76,26 @@ class Ui_Form(object):
 "    border-radius:7px;\n"
 "    border:1px solid rgb(53, 132, 228);\n"
 "}")
-        self.lineEdit_2.setObjectName("lineEdit_2")
-        self.verticalLayout_2.addWidget(self.lineEdit_2)
-        self.verticalLayout_4.addLayout(self.verticalLayout_2)
-        self.verticalLayout_3 = QtWidgets.QVBoxLayout()
-        self.verticalLayout_3.setObjectName("verticalLayout_3")
-        self.label_3 = QtWidgets.QLabel(Form)
-        self.label_3.setMinimumSize(QtCore.QSize(0, 30))
-        self.label_3.setMaximumSize(QtCore.QSize(16777215, 30))
+        self.lineEdit_7.setObjectName("lineEdit_7")
+        self.verticalLayout_7.addWidget(self.lineEdit_7)
+        self.verticalLayout_10.addLayout(self.verticalLayout_7)
+        self.verticalLayout_9 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_9.setObjectName("verticalLayout_9")
+        self.label_9 = QtWidgets.QLabel(Dialog)
+        self.label_9.setMinimumSize(QtCore.QSize(0, 30))
+        self.label_9.setMaximumSize(QtCore.QSize(16777215, 30))
         font = QtGui.QFont()
         font.setPointSize(12)
-        self.label_3.setFont(font)
-        self.label_3.setObjectName("label_3")
-        self.verticalLayout_3.addWidget(self.label_3)
-        self.lineEdit_3 = QtWidgets.QLineEdit(Form)
-        self.lineEdit_3.setMinimumSize(QtCore.QSize(0, 36))
-        self.lineEdit_3.setMaximumSize(QtCore.QSize(16777215, 36))
+        self.label_9.setFont(font)
+        self.label_9.setObjectName("label_9")
+        self.verticalLayout_9.addWidget(self.label_9)
+        self.lineEdit_9 = QtWidgets.QLineEdit(Dialog)
+        self.lineEdit_9.setMinimumSize(QtCore.QSize(0, 36))
+        self.lineEdit_9.setMaximumSize(QtCore.QSize(16777215, 36))
         font = QtGui.QFont()
         font.setPointSize(12)
-        self.lineEdit_3.setFont(font)
-        self.lineEdit_3.setStyleSheet("QLineEdit{\n"
+        self.lineEdit_9.setFont(font)
+        self.lineEdit_9.setStyleSheet("QLineEdit{\n"
 "    background-color: rgb(255, 255, 255);\n"
 "    border-radius:7px;\n"
 "    border:1px solid #333;\n"
@@ -113,15 +106,15 @@ class Ui_Form(object):
 "    border-radius:7px;\n"
 "    border:1px solid rgb(53, 132, 228);\n"
 "}")
-        self.lineEdit_3.setObjectName("lineEdit_3")
-        self.verticalLayout_3.addWidget(self.lineEdit_3)
-        self.verticalLayout_4.addLayout(self.verticalLayout_3)
-        self.horizontalLayout = QtWidgets.QHBoxLayout()
-        self.horizontalLayout.setObjectName("horizontalLayout")
+        self.lineEdit_9.setObjectName("lineEdit_9")
+        self.verticalLayout_9.addWidget(self.lineEdit_9)
+        self.verticalLayout_10.addLayout(self.verticalLayout_9)
+        self.horizontalLayout_3 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_3.setObjectName("horizontalLayout_3")
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout.addItem(spacerItem)
-        self.pushButton_3 = QtWidgets.QPushButton(Form)
-        self.pushButton_3.setStyleSheet("QPushButton{\n"
+        self.horizontalLayout_3.addItem(spacerItem)
+        self.pushButton_6 = QtWidgets.QPushButton(Dialog)
+        self.pushButton_6.setStyleSheet("QPushButton{\n"
 "    border:none;\n"
 "    border-radius:7px;\n"
 "    padding:10px;\n"
@@ -130,13 +123,12 @@ class Ui_Form(object):
 "}\n"
 "\n"
 "QPushButton:hover{\n"
-"    \n"
-"    background-color: rgb(98, 160, 234);\n"
+"    background-color: rgb(246, 97, 81);\n"
 "}")
-        self.pushButton_3.setObjectName("pushButton_3")
-        self.horizontalLayout.addWidget(self.pushButton_3)
-        self.pushButton_2 = QtWidgets.QPushButton(Form)
-        self.pushButton_2.setStyleSheet("QPushButton{\n"
+        self.pushButton_6.setObjectName("pushButton_6")
+        self.horizontalLayout_3.addWidget(self.pushButton_6)
+        self.pushButton_7 = QtWidgets.QPushButton(Dialog)
+        self.pushButton_7.setStyleSheet("QPushButton{\n"
 "    border:none;\n"
 "    border-radius:7px;\n"
 "    padding:10px;\n"
@@ -148,32 +140,31 @@ class Ui_Form(object):
 "    \n"
 "    background-color: rgb(98, 160, 234);\n"
 "}")
-        self.pushButton_2.setObjectName("pushButton_2")
-        self.horizontalLayout.addWidget(self.pushButton_2)
-        self.verticalLayout_4.addLayout(self.horizontalLayout)
+        self.pushButton_7.setObjectName("pushButton_7")
+        self.horizontalLayout_3.addWidget(self.pushButton_7)
+        self.verticalLayout_10.addLayout(self.horizontalLayout_3)
 
-        self.retranslateUi(Form)
-        QtCore.QMetaObject.connectSlotsByName(Form)
+        self.retranslateUi(Dialog)
+        QtCore.QMetaObject.connectSlotsByName(Dialog)
 
-    def retranslateUi(self, Form):
+    def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Мижоз қўшиш"))
-        self.label.setText(_translate("Form", "Исм Фамиля"))
-        self.lineEdit.setPlaceholderText(_translate("Form", "Исм Фамиля"))
-        self.label_2.setText(_translate("Form", "Компания"))
-        self.lineEdit_2.setPlaceholderText(_translate("Form", "Компания"))
-        self.label_3.setText(_translate("Form", "Телефон рақам"))
-        self.lineEdit_3.setPlaceholderText(_translate("Form", "Телефон рақам"))
-        self.pushButton_3.setText(_translate("Form", "Бекор қилиш"))
-        self.pushButton_2.setText(_translate("Form", "Қўшиш"))
-import resources_rc
+        Dialog.setWindowTitle(_translate("Dialog", "Мижоз қўшиш"))
+        self.label_8.setText(_translate("Dialog", "Исм Фамиля"))
+        self.lineEdit_8.setPlaceholderText(_translate("Dialog", "Исм Фамиля"))
+        self.label_7.setText(_translate("Dialog", "Компания"))
+        self.lineEdit_7.setPlaceholderText(_translate("Dialog", "Компания"))
+        self.label_9.setText(_translate("Dialog", "Телефон рақам"))
+        self.lineEdit_9.setPlaceholderText(_translate("Dialog", "Телефон рақам"))
+        self.pushButton_6.setText(_translate("Dialog", "Бекор қилиш"))
+        self.pushButton_7.setText(_translate("Dialog", "Қўшиш"))
 
 
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
-    Form = QtWidgets.QWidget()
-    ui = Ui_Form()
-    ui.setupUi(Form)
-    Form.show()
+    Dialog = QtWidgets.QDialog()
+    ui = Ui_Dialog()
+    ui.setupUi(Dialog)
+    Dialog.show()
     sys.exit(app.exec_())

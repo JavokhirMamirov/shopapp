@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Form</class>
- <widget class="QWidget" name="Form">
+ <class>Dialog</class>
+ <widget class="QDialog" name="Dialog">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>381</height>
+    <height>380</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -25,21 +25,11 @@
   <property name="windowTitle">
    <string>Мижоз қўшиш</string>
   </property>
-  <property name="windowIcon">
-   <iconset resource="../resources.qrc">
-    <normaloff>:/newPrefix/assets/client.png</normaloff>:/newPrefix/assets/client.png</iconset>
-  </property>
-  <property name="styleSheet">
-   <string notr="true">#Form{
-	
-	background-color: rgb(255, 255, 255);
-}</string>
-  </property>
-  <layout class="QVBoxLayout" name="verticalLayout_4">
+  <layout class="QVBoxLayout" name="verticalLayout_10">
    <item>
-    <layout class="QVBoxLayout" name="verticalLayout">
+    <layout class="QVBoxLayout" name="verticalLayout_8">
      <item>
-      <widget class="QLabel" name="label">
+      <widget class="QLabel" name="label_8">
        <property name="minimumSize">
         <size>
          <width>0</width>
@@ -63,7 +53,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineEdit">
+      <widget class="QLineEdit" name="lineEdit_8">
        <property name="minimumSize">
         <size>
          <width>0</width>
@@ -102,9 +92,9 @@ QLineEdit:focus{
     </layout>
    </item>
    <item>
-    <layout class="QVBoxLayout" name="verticalLayout_2">
+    <layout class="QVBoxLayout" name="verticalLayout_7">
      <item>
-      <widget class="QLabel" name="label_2">
+      <widget class="QLabel" name="label_7">
        <property name="minimumSize">
         <size>
          <width>0</width>
@@ -128,7 +118,7 @@ QLineEdit:focus{
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineEdit_2">
+      <widget class="QLineEdit" name="lineEdit_7">
        <property name="minimumSize">
         <size>
          <width>0</width>
@@ -167,9 +157,9 @@ QLineEdit:focus{
     </layout>
    </item>
    <item>
-    <layout class="QVBoxLayout" name="verticalLayout_3">
+    <layout class="QVBoxLayout" name="verticalLayout_9">
      <item>
-      <widget class="QLabel" name="label_3">
+      <widget class="QLabel" name="label_9">
        <property name="minimumSize">
         <size>
          <width>0</width>
@@ -193,7 +183,7 @@ QLineEdit:focus{
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineEdit_3">
+      <widget class="QLineEdit" name="lineEdit_9">
        <property name="minimumSize">
         <size>
          <width>0</width>
@@ -232,9 +222,9 @@ QLineEdit:focus{
     </layout>
    </item>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout">
+    <layout class="QHBoxLayout" name="horizontalLayout_3">
      <item>
-      <spacer name="horizontalSpacer">
+      <spacer name="horizontalSpacer_3">
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
        </property>
@@ -247,7 +237,7 @@ QLineEdit:focus{
       </spacer>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_3">
+      <widget class="QPushButton" name="pushButton_6">
        <property name="styleSheet">
         <string notr="true">QPushButton{
 	border:none;
@@ -258,8 +248,7 @@ QLineEdit:focus{
 }
 
 QPushButton:hover{
-	
-	background-color: rgb(98, 160, 234);
+	background-color: rgb(246, 97, 81);
 }</string>
        </property>
        <property name="text">
@@ -268,7 +257,7 @@ QPushButton:hover{
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_2">
+      <widget class="QPushButton" name="pushButton_7">
        <property name="styleSheet">
         <string notr="true">QPushButton{
 	border:none;
@@ -292,8 +281,6 @@ QPushButton:hover{
    </item>
   </layout>
  </widget>
- <resources>
-  <include location="../resources.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>
