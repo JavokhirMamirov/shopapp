@@ -1,8 +1,20 @@
 import sys
 from PyQt5.QtWidgets import QMainWindow, QApplication, QPushButton
 from ux import main_ux
-from libs.extra_functions import MENU_SELECTED_STYLESHEET, InsertItemToTable, TableStretchAndHide
+from libs.extra_functions import MENU_SELECTED_STYLESHEET, InsertItemToTable, TableStretchAndHide, ClearTableWidget
 from components import add_client
+import sqlite3
+from PyQt5.QtCore import pyqtSignal
+
+#create a database or connect
+conn = sqlite3.connect('store.db')
+cur = conn.cursor()
+cur.execute("""CREATE TABLE if not exists client(
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name VARCHAR NOT NULL,
+        company VARCHAR NULL,
+        phone VARCHAR NULL
+    );""")
 
 class ShopApp(QMainWindow, main_ux.Ui_MainWindow):
     def __init__(self, *args, **kwargs):
@@ -14,15 +26,50 @@ class ShopApp(QMainWindow, main_ux.Ui_MainWindow):
         self.menuButtonClicked()
         self.tableWidgetSettings()
         self.addClientWindow = add_client.AddClientWindow(self)
+        self.addClientWindow.closeapp.connect(self.closeAddClientWindow)
         self.pushButton_5.clicked.connect(self.openAddClientWindow)
+        self.lineEdit_2.textChanged.connect(self.searchClient)
+        self.listClient()
+
+    def searchClient(self, value):
+        cur.execute("""select * from client where (name like (?) or company like (?) or phone like (?) )""", (f"%{value}%", f"%{value}%", f"%{value}%"))
+        data = cur.fetchall()
+        ClearTableWidget(self.tableWidget_2)
+        i = 0
+        for dt in data:
+            lists = [
+                dt[0],
+                i+1,
+                dt[1],
+                dt[2],
+                dt[3]
+            ]
+            self.tableWidget_2.insertRow(i)
+            InsertItemToTable(self.tableWidget_2, i, lists)
+            i += 1
+
+
+    def listClient(self):
+        cur.execute("""select * from client""")
+        data = cur.fetchall()
+        i = 0
+        for dt in data:
+            lists = [
+                dt[0],
+                i+1,
+                dt[1],
+                dt[2],
+                dt[3]
+            ]
+            self.tableWidget_2.insertRow(i)
+            InsertItemToTable(self.tableWidget_2, i, lists)
+            i += 1
 
     
-    def connectDatabase(self):
-        conn = psycopg2.connect(
-            host="localhost",
-            database="suppliers",
-            user="postgres",
-            password="Abcd1234")
+    def closeAddClientWindow(self, refresh):
+        if refresh:
+            ClearTableWidget(self.tableWidget_2)
+            self.listClient()
 
     def openAddClientWindow(self):
         self.addClientWindow.exec()
