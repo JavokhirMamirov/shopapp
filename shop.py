@@ -1,8 +1,8 @@
 import sys
-from PyQt5.QtWidgets import QMainWindow, QApplication, QPushButton
+from PyQt5.QtWidgets import QMainWindow, QApplication, QPushButton, QMessageBox
 from ux import main_ux
 from libs.extra_functions import MENU_SELECTED_STYLESHEET, InsertItemToTable, TableStretchAndHide, ClearTableWidget
-from components import add_client
+from components import add_client, action_button
 import sqlite3
 from PyQt5.QtCore import pyqtSignal
 
@@ -37,16 +37,67 @@ class ShopApp(QMainWindow, main_ux.Ui_MainWindow):
         ClearTableWidget(self.tableWidget_2)
         i = 0
         for dt in data:
+            clientActionButtons = action_button.ActionButtons(edit=True, delete=True)
+            clientActionButtons.btn_edit.clicked.connect(self.clientEditClick)
+            clientActionButtons.btn_delete.clicked.connect(self.clientDeleteClick)
             lists = [
                 dt[0],
                 i+1,
                 dt[1],
                 dt[2],
-                dt[3]
+                dt[3],
+                clientActionButtons,
             ]
             self.tableWidget_2.insertRow(i)
-            InsertItemToTable(self.tableWidget_2, i, lists)
+            InsertItemToTable(self.tableWidget_2, i, lists, list_widget=[5])
             i += 1
+
+    def clientEditClick(self):
+        row = self.tableWidget_2.indexAt(self.sender().parent().pos()).row()
+        id = self.tableWidget_2.item(row, 0).text()
+        index = self.tableWidget_2.item(row, 1).text()
+        name = self.tableWidget_2.item(row, 2).text()
+        company = self.tableWidget_2.item(row, 3).text()
+        phone = self.tableWidget_2.item(row, 4).text()
+        data = {
+            "id":id,
+            "row":row,
+            "index":index,
+            "name":name,
+            "company":company,
+            "phone":phone
+        }
+        editClientWindow = add_client.EditClientWindow(data=data, parent=self)
+        editClientWindow.closeapp.connect(self.closeEditClientWindow)
+        editClientWindow.exec()
+
+    def closeEditClientWindow(self, list):
+        if list:
+            clientActionButtons = action_button.ActionButtons(edit=True, delete=True)
+            clientActionButtons.btn_edit.clicked.connect(self.clientEditClick)
+            clientActionButtons.btn_delete.clicked.connect(self.clientDeleteClick)
+            lists = [   
+                list['id'],
+                list['index'],
+                list['name'],
+                list['company'],
+                list['phone'],
+                clientActionButtons
+            ]
+            InsertItemToTable(self.tableWidget_2,list['row'], lists, list_widget=[5] )
+
+    def clientDeleteClick(self):
+        row = self.tableWidget_2.indexAt(self.sender().parent().pos()).row()
+        id = self.tableWidget_2.item(row, 0).text()
+        reply = QMessageBox.question(self, 'Ўчириш', "Сиз ушбу мижозни ўчирмоқчимисиз?", QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
+        
+        if reply == QMessageBox.Yes:
+            cur.execute("""delete from client where id=?""", id)
+            conn.commit()
+            ClearTableWidget(self.tableWidget_2)
+            self.listClient()
+        else:
+            pass
 
 
     def listClient(self):
@@ -54,15 +105,19 @@ class ShopApp(QMainWindow, main_ux.Ui_MainWindow):
         data = cur.fetchall()
         i = 0
         for dt in data:
+            clientActionButtons = action_button.ActionButtons(edit=True, delete=True)
+            clientActionButtons.btn_edit.clicked.connect(self.clientEditClick)
+            clientActionButtons.btn_delete.clicked.connect(self.clientDeleteClick)
             lists = [
                 dt[0],
                 i+1,
                 dt[1],
                 dt[2],
-                dt[3]
+                dt[3],
+                clientActionButtons,
             ]
             self.tableWidget_2.insertRow(i)
-            InsertItemToTable(self.tableWidget_2, i, lists)
+            InsertItemToTable(self.tableWidget_2, i, lists, list_widget=[5])
             i += 1
 
     

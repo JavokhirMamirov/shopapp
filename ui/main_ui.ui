@@ -783,6 +783,9 @@ QScrollBar:vertical {
              <property name="editTriggers">
               <set>QAbstractItemView::NoEditTriggers</set>
              </property>
+             <property name="selectionMode">
+              <enum>QAbstractItemView::NoSelection</enum>
+             </property>
              <property name="selectionBehavior">
               <enum>QAbstractItemView::SelectRows</enum>
              </property>
@@ -1265,6 +1268,9 @@ QScrollBar:vertical {
              <property name="editTriggers">
               <set>QAbstractItemView::NoEditTriggers</set>
              </property>
+             <property name="selectionMode">
+              <enum>QAbstractItemView::NoSelection</enum>
+             </property>
              <property name="selectionBehavior">
               <enum>QAbstractItemView::SelectRows</enum>
              </property>
@@ -1306,6 +1312,11 @@ QScrollBar:vertical {
              <column>
               <property name="text">
                <string>Телефон рақам</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>Тахрирлаш</string>
               </property>
              </column>
             </widget>
@@ -1579,6 +1590,9 @@ QScrollBar:vertical {
              </property>
              <property name="editTriggers">
               <set>QAbstractItemView::NoEditTriggers</set>
+             </property>
+             <property name="selectionMode">
+              <enum>QAbstractItemView::NoSelection</enum>
              </property>
              <property name="selectionBehavior">
               <enum>QAbstractItemView::SelectRows</enum>
@@ -1927,6 +1941,9 @@ QScrollBar:vertical {
              </property>
              <property name="editTriggers">
               <set>QAbstractItemView::NoEditTriggers</set>
+             </property>
+             <property name="selectionMode">
+              <enum>QAbstractItemView::NoSelection</enum>
              </property>
              <property name="selectionBehavior">
               <enum>QAbstractItemView::SelectRows</enum>
