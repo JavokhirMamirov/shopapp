@@ -124,10 +124,15 @@ QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal
 	border-radius:7px;
 	background-color: rgb(255, 255, 255);
 }
-QHeaderView::section { 
-	padding:7px;
-	font-size:12px;
+QHeaderView::section {
+    background-color: #006CFE;
+    padding: 4px;
+    font-size: 14px;
+	color:#fff;
+    border-style: none;
+	border-right:1px solid rgb(154, 153, 150);
 }
+
 QTableWidget::item:selected{
 	background-color: rgb(111, 162, 28);
 	color: rgb(255, 255, 255);
