@@ -2,7 +2,7 @@ import sys
 from PyQt5.QtWidgets import QMainWindow, QApplication, QPushButton, QMessageBox
 from ux import main_ux
 from libs.extra_functions import MENU_SELECTED_STYLESHEET, InsertItemToTable, TableStretchAndHide, ClearTableWidget
-from components import add_client, action_button, product_components, dollor_components, search_product_frame
+from components import add_client, action_button, product_components, dollor_components, search_product_frame, basket_components
 import sqlite3
 from PyQt5.QtCore import pyqtSignal
 from PyQt5 import QtCore
@@ -32,6 +32,21 @@ class ShopApp(QMainWindow, main_ux.Ui_MainWindow):
         self.pushButton_7.clicked.connect(self.openDollorKursiForm)
         self.setDollorKursi()
         self.lineEdit.textChanged.connect(self.searchSavdoProduct)
+        self.basketList()
+
+    def basketList(self):
+        cur.execute("""select * from basket where savdo_id IS NULL;""")
+        data = cur.fetchall()
+        print(data)
+
+    def closeAddBasketWindow(self, refresh):
+        if refresh:
+            self.basketList()
+
+    def openAddBasketWindow(self, id):
+        window = basket_components.AddBasketWindow(id, parent=self)
+        window.closeapp.connect(self.closeAddBasketWindow)
+        window.exec()
 
     def keyPressEvent(self, event):
         if event.key() == QtCore.Qt.Key.Key_Escape:
@@ -42,6 +57,12 @@ class ShopApp(QMainWindow, main_ux.Ui_MainWindow):
             if self.main_stack.currentWidget() == self.page_savdo  and  self.search_product_frame.isVisible() and self.lineEdit.hasFocus():
                 self.search_product_frame.table_search.selectRow(0)
                 self.search_product_frame.table_search.setFocus()
+        
+        if event.key() == QtCore.Qt.Key.Key_Enter or event.key() == QtCore.Qt.Key.Key_Return:
+            if self.search_product_frame.isVisible() and self.search_product_frame.table_search.hasFocus():
+                r = self.search_product_frame.table_search.currentRow()
+                id = self.search_product_frame.table_search.item(r, 0).text()
+                self.openAddBasketWindow(id)
 
 
     def searchSavdoProduct(self, value):
@@ -367,6 +388,6 @@ class ShopApp(QMainWindow, main_ux.Ui_MainWindow):
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     window = ShopApp()
-    window.show()
+    window.showMaximized()
     sys.exit(app.exec_())
     

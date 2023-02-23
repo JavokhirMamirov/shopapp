@@ -21,3 +21,16 @@ def DataBaseTableCreate(cur):
         now_date VARCHAR NOT NULL,
         old_summa INTEGER NULL,
         old_date VARCHAR NULL);""")
+    
+    cur.execute("""CREATE TABLE if not exists basket(
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        savdo_id INTEGER NULL,
+        product_id INTEGER NOT NULL,
+        name VARCHAR NOT NULL,
+        brend VARCHAR NULL,
+        model VARCHAR NULL,
+        factory VARCHAR NULL,
+        birlik VARCHAR NULL,
+        narxi INTEGER NOT NULL,
+        soni INTEGER NOT NULL,
+        summa INTEGER NOT NULL);""")
