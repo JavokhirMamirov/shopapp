@@ -14,14 +14,18 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
-        Dialog.resize(400, 410)
+        Dialog.resize(400, 503)
         Dialog.setMinimumSize(QtCore.QSize(400, 0))
         Dialog.setMaximumSize(QtCore.QSize(400, 16777215))
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap(":/newPrefix/assets/product-white.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         Dialog.setWindowIcon(icon)
-        self.verticalLayout_2 = QtWidgets.QVBoxLayout(Dialog)
-        self.verticalLayout_2.setObjectName("verticalLayout_2")
+        Dialog.setStyleSheet("#Dialog{\n"
+"    background-color: rgb(255, 255, 255);\n"
+"}")
+        self.verticalLayout_3 = QtWidgets.QVBoxLayout(Dialog)
+        self.verticalLayout_3.setSpacing(9)
+        self.verticalLayout_3.setObjectName("verticalLayout_3")
         self.verticalLayout_8 = QtWidgets.QVBoxLayout()
         self.verticalLayout_8.setObjectName("verticalLayout_8")
         self.label_8 = QtWidgets.QLabel(Dialog)
@@ -51,7 +55,7 @@ class Ui_Dialog(object):
 "}")
         self.lineEdit_8.setObjectName("lineEdit_8")
         self.verticalLayout_8.addWidget(self.lineEdit_8)
-        self.verticalLayout_2.addLayout(self.verticalLayout_8)
+        self.verticalLayout_3.addLayout(self.verticalLayout_8)
         self.verticalLayout_7 = QtWidgets.QVBoxLayout()
         self.verticalLayout_7.setObjectName("verticalLayout_7")
         self.label_7 = QtWidgets.QLabel(Dialog)
@@ -81,7 +85,7 @@ class Ui_Dialog(object):
 "}")
         self.lineEdit_7.setObjectName("lineEdit_7")
         self.verticalLayout_7.addWidget(self.lineEdit_7)
-        self.verticalLayout_2.addLayout(self.verticalLayout_7)
+        self.verticalLayout_3.addLayout(self.verticalLayout_7)
         self.verticalLayout_9 = QtWidgets.QVBoxLayout()
         self.verticalLayout_9.setObjectName("verticalLayout_9")
         self.label_9 = QtWidgets.QLabel(Dialog)
@@ -111,7 +115,40 @@ class Ui_Dialog(object):
 "}")
         self.lineEdit_9.setObjectName("lineEdit_9")
         self.verticalLayout_9.addWidget(self.lineEdit_9)
-        self.verticalLayout_2.addLayout(self.verticalLayout_9)
+        self.verticalLayout_3.addLayout(self.verticalLayout_9)
+        self.verticalLayout_10 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_10.setObjectName("verticalLayout_10")
+        self.label_12 = QtWidgets.QLabel(Dialog)
+        self.label_12.setMinimumSize(QtCore.QSize(0, 30))
+        self.label_12.setMaximumSize(QtCore.QSize(16777215, 30))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.label_12.setFont(font)
+        self.label_12.setObjectName("label_12")
+        self.verticalLayout_10.addWidget(self.label_12)
+        self.lineEdit_10 = QtWidgets.QLineEdit(Dialog)
+        self.lineEdit_10.setMinimumSize(QtCore.QSize(0, 36))
+        self.lineEdit_10.setMaximumSize(QtCore.QSize(16777215, 36))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.lineEdit_10.setFont(font)
+        self.lineEdit_10.setStyleSheet("QLineEdit{\n"
+"    background-color: rgb(255, 255, 255);\n"
+"    border-radius:7px;\n"
+"    border:1px solid #333;\n"
+"}\n"
+"\n"
+"QLineEdit:focus{\n"
+"    background-color: rgb(255, 255, 255);\n"
+"    border-radius:7px;\n"
+"    border:1px solid rgb(53, 132, 228);\n"
+"}")
+        self.lineEdit_10.setObjectName("lineEdit_10")
+        self.verticalLayout_10.addWidget(self.lineEdit_10)
+        self.verticalLayout_3.addLayout(self.verticalLayout_10)
+        self.horizontalLayout = QtWidgets.QHBoxLayout()
+        self.horizontalLayout.setSpacing(15)
+        self.horizontalLayout.setObjectName("horizontalLayout")
         self.verticalLayout = QtWidgets.QVBoxLayout()
         self.verticalLayout.setObjectName("verticalLayout")
         self.label_10 = QtWidgets.QLabel(Dialog)
@@ -145,11 +182,48 @@ class Ui_Dialog(object):
         self.doubleSpinBox.setStepType(QtWidgets.QAbstractSpinBox.DefaultStepType)
         self.doubleSpinBox.setObjectName("doubleSpinBox")
         self.verticalLayout.addWidget(self.doubleSpinBox)
-        self.verticalLayout_2.addLayout(self.verticalLayout)
+        self.horizontalLayout.addLayout(self.verticalLayout)
+        self.verticalLayout_2 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_2.setObjectName("verticalLayout_2")
+        self.label_11 = QtWidgets.QLabel(Dialog)
+        self.label_11.setMinimumSize(QtCore.QSize(0, 30))
+        self.label_11.setMaximumSize(QtCore.QSize(16777215, 30))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.label_11.setFont(font)
+        self.label_11.setObjectName("label_11")
+        self.verticalLayout_2.addWidget(self.label_11)
+        self.doubleSpinBox_2 = QtWidgets.QDoubleSpinBox(Dialog)
+        self.doubleSpinBox_2.setMinimumSize(QtCore.QSize(0, 36))
+        self.doubleSpinBox_2.setMaximumSize(QtCore.QSize(16777215, 36))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.doubleSpinBox_2.setFont(font)
+        self.doubleSpinBox_2.setStyleSheet("QDoubleSpinBox{\n"
+"    background-color: rgb(255, 255, 255);\n"
+"    border-radius:7px;\n"
+"    border:1px solid #333;\n"
+"}\n"
+"\n"
+"QDoubleSpinBox:focus{\n"
+"    background-color: rgb(255, 255, 255);\n"
+"    border-radius:7px;\n"
+"    border:1px solid rgb(53, 132, 228);\n"
+"}")
+        self.doubleSpinBox_2.setButtonSymbols(QtWidgets.QAbstractSpinBox.NoButtons)
+        self.doubleSpinBox_2.setProperty("showGroupSeparator", True)
+        self.doubleSpinBox_2.setMaximum(999999999.0)
+        self.doubleSpinBox_2.setStepType(QtWidgets.QAbstractSpinBox.DefaultStepType)
+        self.doubleSpinBox_2.setObjectName("doubleSpinBox_2")
+        self.verticalLayout_2.addWidget(self.doubleSpinBox_2)
+        self.horizontalLayout.addLayout(self.verticalLayout_2)
+        self.verticalLayout_3.addLayout(self.horizontalLayout)
+        spacerItem = QtWidgets.QSpacerItem(20, 15, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
+        self.verticalLayout_3.addItem(spacerItem)
         self.horizontalLayout_3 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_3.setObjectName("horizontalLayout_3")
-        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout_3.addItem(spacerItem)
+        spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_3.addItem(spacerItem1)
         self.pushButton_6 = QtWidgets.QPushButton(Dialog)
         self.pushButton_6.setStyleSheet("QPushButton{\n"
 "    border:none;\n"
@@ -179,7 +253,7 @@ class Ui_Dialog(object):
 "}")
         self.pushButton_7.setObjectName("pushButton_7")
         self.horizontalLayout_3.addWidget(self.pushButton_7)
-        self.verticalLayout_2.addLayout(self.horizontalLayout_3)
+        self.verticalLayout_3.addLayout(self.horizontalLayout_3)
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
@@ -193,11 +267,14 @@ class Ui_Dialog(object):
         self.lineEdit_7.setPlaceholderText(_translate("Dialog", "Бренди"))
         self.label_9.setText(_translate("Dialog", "Модели"))
         self.lineEdit_9.setPlaceholderText(_translate("Dialog", "Модели"))
-        self.label_10.setText(_translate("Dialog", "Нархи"))
+        self.label_12.setText(_translate("Dialog", "Ишлаб чиқарувчи"))
+        self.lineEdit_10.setPlaceholderText(_translate("Dialog", "Ишлаб чиқарувчи"))
+        self.label_10.setText(_translate("Dialog", "Нархи комп $"))
+        self.label_11.setText(_translate("Dialog", "Нархи дона $"))
         self.pushButton_6.setText(_translate("Dialog", "Бекор қилиш"))
         self.pushButton_6.setShortcut(_translate("Dialog", "Esc"))
         self.pushButton_7.setText(_translate("Dialog", "Қўшиш"))
-        self.pushButton_7.setShortcut(_translate("Dialog", "Return"))
+        self.pushButton_7.setShortcut(_translate("Dialog", "Return, Enter"))
 import resources_rc
 
 

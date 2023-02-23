@@ -11,5 +11,13 @@ def DataBaseTableCreate(cur):
         name VARCHAR NOT NULL,
         brend VARCHAR NULL,
         model VARCHAR NULL,
-        price REAL NOT NULL
-    );""")
+        factory VARCHAR NULL,
+        price_box REAL NOT NULL,
+        price_one REAL NOT NULL);""")
+    
+    cur.execute("""CREATE TABLE if not exists dollor(
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        now_summa INTEGER NOT NULL,
+        now_date VARCHAR NOT NULL,
+        old_summa INTEGER NULL,
+        old_date VARCHAR NULL);""")

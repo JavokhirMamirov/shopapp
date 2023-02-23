@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>410</height>
+    <height>498</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -29,7 +29,15 @@
    <iconset resource="../resources.qrc">
     <normaloff>:/newPrefix/assets/product-white.png</normaloff>:/newPrefix/assets/product-white.png</iconset>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout_2">
+  <property name="styleSheet">
+   <string notr="true">#Dialog{
+	background-color: rgb(255, 255, 255);
+}</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_3">
+   <property name="spacing">
+    <number>9</number>
+   </property>
    <item>
     <layout class="QVBoxLayout" name="verticalLayout_8">
      <item>
@@ -226,9 +234,9 @@ QLineEdit:focus{
     </layout>
    </item>
    <item>
-    <layout class="QVBoxLayout" name="verticalLayout">
+    <layout class="QVBoxLayout" name="verticalLayout_10">
      <item>
-      <widget class="QLabel" name="label_10">
+      <widget class="QLabel" name="label_12">
        <property name="minimumSize">
         <size>
          <width>0</width>
@@ -247,12 +255,12 @@ QLineEdit:focus{
         </font>
        </property>
        <property name="text">
-        <string>Нархи</string>
+        <string>Ишлаб чиқарувчи</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QDoubleSpinBox" name="doubleSpinBox">
+      <widget class="QLineEdit" name="lineEdit_10">
        <property name="minimumSize">
         <size>
          <width>0</width>
@@ -271,7 +279,77 @@ QLineEdit:focus{
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">QDoubleSpinBox{
+        <string notr="true">QLineEdit{
+	background-color: rgb(255, 255, 255);
+	border-radius:7px;
+	border:1px solid #333;
+}
+
+QLineEdit:focus{
+	background-color: rgb(255, 255, 255);
+	border-radius:7px;
+	border:1px solid rgb(53, 132, 228);
+}</string>
+       </property>
+       <property name="placeholderText">
+        <string>Ишлаб чиқарувчи</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <property name="spacing">
+      <number>15</number>
+     </property>
+     <item>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QLabel" name="label_10">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Нархи комп $</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QDoubleSpinBox" name="doubleSpinBox">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>36</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>36</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QDoubleSpinBox{
 	background-color: rgb(255, 255, 255);
 	border-radius:7px;
 	border:1px solid #333;
@@ -282,22 +360,114 @@ QDoubleSpinBox:focus{
 	border-radius:7px;
 	border:1px solid rgb(53, 132, 228);
 }</string>
-       </property>
-       <property name="buttonSymbols">
-        <enum>QAbstractSpinBox::NoButtons</enum>
-       </property>
-       <property name="showGroupSeparator" stdset="0">
-        <bool>true</bool>
-       </property>
-       <property name="maximum">
-        <double>999999999.000000000000000</double>
-       </property>
-       <property name="stepType">
-        <enum>QAbstractSpinBox::DefaultStepType</enum>
-       </property>
-      </widget>
+         </property>
+         <property name="buttonSymbols">
+          <enum>QAbstractSpinBox::NoButtons</enum>
+         </property>
+         <property name="showGroupSeparator" stdset="0">
+          <bool>true</bool>
+         </property>
+         <property name="maximum">
+          <double>999999999.000000000000000</double>
+         </property>
+         <property name="stepType">
+          <enum>QAbstractSpinBox::DefaultStepType</enum>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <widget class="QLabel" name="label_11">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Нархи дона $</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QDoubleSpinBox" name="doubleSpinBox_2">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>36</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>36</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QDoubleSpinBox{
+	background-color: rgb(255, 255, 255);
+	border-radius:7px;
+	border:1px solid #333;
+}
+
+QDoubleSpinBox:focus{
+	background-color: rgb(255, 255, 255);
+	border-radius:7px;
+	border:1px solid rgb(53, 132, 228);
+}</string>
+         </property>
+         <property name="buttonSymbols">
+          <enum>QAbstractSpinBox::NoButtons</enum>
+         </property>
+         <property name="showGroupSeparator" stdset="0">
+          <bool>true</bool>
+         </property>
+         <property name="maximum">
+          <double>999999999.000000000000000</double>
+         </property>
+         <property name="stepType">
+          <enum>QAbstractSpinBox::DefaultStepType</enum>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </item>
     </layout>
+   </item>
+   <item>
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Fixed</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>15</height>
+      </size>
+     </property>
+    </spacer>
    </item>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_3">
@@ -357,7 +527,7 @@ QPushButton:hover{
         <string>Тахрирлаш</string>
        </property>
        <property name="shortcut">
-        <string>Return</string>
+        <string>Return, Enter</string>
        </property>
       </widget>
      </item>

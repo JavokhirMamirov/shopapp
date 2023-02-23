@@ -2,10 +2,11 @@ import sys
 from PyQt5.QtWidgets import QMainWindow, QApplication, QPushButton, QMessageBox
 from ux import main_ux
 from libs.extra_functions import MENU_SELECTED_STYLESHEET, InsertItemToTable, TableStretchAndHide, ClearTableWidget
-from components import add_client, action_button, product_components
+from components import add_client, action_button, product_components, dollor_components
 import sqlite3
 from PyQt5.QtCore import pyqtSignal
 from db.database_tables import DataBaseTableCreate
+import datetime
 #create a database or connect
 conn = sqlite3.connect('store.db')
 cur = conn.cursor()
@@ -20,15 +21,40 @@ class ShopApp(QMainWindow, main_ux.Ui_MainWindow):
         self.main_stack.currentChanged.connect(self.PageChanged)
         self.menuButtonClicked()
         self.tableWidgetSettings()
-        self.addClientWindow = add_client.AddClientWindow(self)
-        self.addProductWindow = product_components.AddProductWindow(self)
-        self.addClientWindow.closeapp.connect(self.closeAddClientWindow)
         self.pushButton_5.clicked.connect(self.openAddClientWindow)
         self.lineEdit_2.textChanged.connect(self.searchClient)
         self.listClient()
         self.listProducts()
         self.pushButton_6.clicked.connect(self.openAddProductWidow)
         self.lineEdit_3.textChanged.connect(self.searchProduct)
+        self.pushButton_7.clicked.connect(self.openDollorKursiForm)
+        self.setDollorKursi()
+    
+    def openDollorKursiForm(self):
+        form = dollor_components.DollorKursiFormWindow(parent=self)
+        form.closeapp.connect(self.closeDollorKursiForm)
+        form.exec()
+
+    def setDollorKursi(self):
+        cur.execute("""select * from dollor""")
+        row = cur.fetchone()
+        self.label_23.setText(str(row[3])+" Сўм")
+        self.label_22.setText(str(row[4]))
+        self.label_20.setText(str(row[1])+" Сўм")
+        self.label_21.setText(str(row[2]))
+
+    def closeDollorKursiForm(self, price):
+        cur.execute("""select * from dollor""")
+        data = cur.fetchall()
+        date = datetime.datetime.today().date()
+        if len(data)>0:
+            row = data[0]
+            cur.execute("""update dollor set now_summa=?, now_date=?, old_summa=?, old_date=?""", (price, date, row[1], row[2]))
+            conn.commit()
+        else:
+            cur.execute("""insert into dollor (now_summa, now_date) values (?,?)""",(price, date))
+            conn.commit()
+        self.setDollorKursi()
 
 
     
@@ -47,15 +73,17 @@ class ShopApp(QMainWindow, main_ux.Ui_MainWindow):
                 dt[2],
                 dt[3],
                 dt[4],
+                dt[5],
+                dt[6],
                 actionButtons,
             ]
             self.tableWidget_3.insertRow(i)
-            InsertItemToTable(self.tableWidget_3, i, lists, list_widget=[6])
+            InsertItemToTable(self.tableWidget_3, i, lists, list_widget=[8])
             i += 1
 
 
     def searchProduct(self, value):
-        cur.execute("""select * from product where (name like (?) or brend like (?) or model like (?) )""", (f"%{value}%", f"%{value}%", f"%{value}%"))
+        cur.execute("""select * from product where (name like (?) or brend like (?) or model like (?) or factory like (?) )""", (f"%{value}%", f"%{value}%", f"%{value}%", f"%{value}%"))
         data = cur.fetchall()
         ClearTableWidget(self.tableWidget_3)
         i = 0
@@ -70,10 +98,12 @@ class ShopApp(QMainWindow, main_ux.Ui_MainWindow):
                 dt[2],
                 dt[3],
                 dt[4],
+                dt[5],
+                dt[6],
                 actionButtons,
             ]
             self.tableWidget_3.insertRow(i)
-            InsertItemToTable(self.tableWidget_3, i, lists, list_widget=[6])
+            InsertItemToTable(self.tableWidget_3, i, lists, list_widget=[8])
             i += 1
     
     def productEditClick(self):
@@ -83,7 +113,9 @@ class ShopApp(QMainWindow, main_ux.Ui_MainWindow):
         name = self.tableWidget_3.item(row, 2).text()
         brend = self.tableWidget_3.item(row, 3).text()
         model = self.tableWidget_3.item(row, 4).text()
-        price = self.tableWidget_3.item(row, 5).text()
+        factory = self.tableWidget_3.item(row, 5).text()
+        price_box = self.tableWidget_3.item(row, 6).text()
+        price_one = self.tableWidget_3.item(row, 7).text()
         data = {
             "id":id,
             "row":row,
@@ -91,7 +123,9 @@ class ShopApp(QMainWindow, main_ux.Ui_MainWindow):
             "name":name,
             "brend":brend,
             "model":model,
-            "price":price
+            "factory":factory,
+            "price_box":price_box,
+            "price_one":price_one,
         }
         editClientWindow = product_components.EditProductWindow(data=data, parent=self)
         editClientWindow.closeapp.connect(self.closeEditProductWindow)
@@ -122,15 +156,18 @@ class ShopApp(QMainWindow, main_ux.Ui_MainWindow):
                 data['name'],
                 data['brend'],
                 data['model'],
-                data['price'],
+                data['factory'],
+                data['price_box'],
+                data['price_one'],
                 actionButtons
             ]
-            InsertItemToTable(self.tableWidget_3, data['row'], lists, list_widget=[6] )
+            InsertItemToTable(self.tableWidget_3, data['row'], lists, list_widget=[8] )
             
     
     def openAddProductWidow(self):
-        self.addProductWindow.closeapp.connect(self.closeAddProductWindow)
-        self.addProductWindow.exec()
+        addProductWindow = product_components.AddProductWindow(parent=self)
+        addProductWindow.closeapp.connect(self.closeAddProductWindow)
+        addProductWindow.exec()
 
     def closeAddProductWindow(self, refresh):
         if refresh:
@@ -233,7 +270,9 @@ class ShopApp(QMainWindow, main_ux.Ui_MainWindow):
             self.listClient()
 
     def openAddClientWindow(self):
-        self.addClientWindow.exec()
+        addClientWindow = add_client.AddClientWindow(parent=self)
+        addClientWindow.closeapp.connect(self.closeAddClientWindow)
+        addClientWindow.exec()
 
 
     def menuButtonClicked(self):
@@ -260,7 +299,7 @@ class ShopApp(QMainWindow, main_ux.Ui_MainWindow):
         TableStretchAndHide(self.tableWidget, lists_column=[2,6],sizeContent=[3,4,5,7,8,9,10], hide_column=[0])
         TableStretchAndHide(self.tableWidget_5, lists_column=[2,6],sizeContent=[3,4,5,7,8,9,10], hide_column=[0])
         TableStretchAndHide(self.tableWidget_2, lists_column=[2,3],hide_column=[0])
-        TableStretchAndHide(self.tableWidget_3, lists_column=[2],hide_column=[0], sizeContent=[5,6])
+        TableStretchAndHide(self.tableWidget_3, lists_column=[2, 5],hide_column=[0], sizeContent=[6,7,8])
         TableStretchAndHide(self.tableWidget_4, lists_column=[2],hide_column=[0])
 
 

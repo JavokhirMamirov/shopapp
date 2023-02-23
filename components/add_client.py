@@ -9,8 +9,8 @@ cur = conn.cursor()
 
 class AddClientWindow(QDialog, add_client_ux.Ui_Dialog):
     closeapp = pyqtSignal(bool)
-    def __init__(self, *args, **kwargs):
-        super(AddClientWindow, self).__init__(*args, **kwargs)
+    def __init__(self, parent=None):
+        super(AddClientWindow, self).__init__(parent)
         self.setupUi(self)
         self.pushButton_6.clicked.connect(self.close)
         self.pushButton_7.clicked.connect(self.save)

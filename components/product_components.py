@@ -9,8 +9,8 @@ cur = conn.cursor()
 
 class AddProductWindow(QDialog, add_product.Ui_Dialog):
     closeapp = pyqtSignal(bool)
-    def __init__(self, *args, **kwargs):
-        super(AddProductWindow, self).__init__(*args, **kwargs)
+    def __init__(self, parent=None):
+        super(AddProductWindow, self).__init__(parent)
         self.setupUi(self)
         self.pushButton_6.clicked.connect(self.close)
         self.pushButton_7.clicked.connect(self.save)
@@ -20,9 +20,11 @@ class AddProductWindow(QDialog, add_product.Ui_Dialog):
         name = self.lineEdit_8.text()
         brend = self.lineEdit_7.text()
         model = self.lineEdit_9.text()
-        price = self.doubleSpinBox.value()
-        if name != "" and price != 0:
-            cur.execute("""insert into product (name, brend, model, price) values (?,?,?,?)""", (name, brend, model, price))
+        factory = self.lineEdit_10.text()
+        price_box = self.doubleSpinBox.value()
+        price_one = self.doubleSpinBox_2.value()
+        if name != "" and price_box != 0 and price_one != 0:
+            cur.execute("""insert into product (name, brend, model,factory, price_box, price_one) values (?,?,?,?,?,?)""", (name, brend, model,factory,price_box, price_one))
             conn.commit()
             self.close()
             self.closeapp.emit(True)
@@ -38,19 +40,25 @@ class EditProductWindow(QDialog, edit_product.Ui_Dialog):
         self.lineEdit_7.setText(data['brend'])
         self.lineEdit_8.setText(data['name'])
         self.lineEdit_9.setText(data['model'])
-        self.doubleSpinBox.setValue(float(data['price']))
+        self.lineEdit_10.setText(data['factory'])
+        self.doubleSpinBox.setValue(float(data['price_box']))
+        self.doubleSpinBox_2.setValue(float(data['price_one']))
 
     def save(self):
         name = self.lineEdit_8.text()
         brend = self.lineEdit_7.text()
         model = self.lineEdit_9.text()
-        price = self.doubleSpinBox.value()
-        if name != "" and price != 0:
-            cur.execute("""update product set name=?, brend=?, model=?, price=? where id=?""", (name, brend, model, price, self.data['id']))
+        factory = self.lineEdit_10.text()
+        price_box = self.doubleSpinBox.value()
+        price_one = self.doubleSpinBox_2.value()
+        if name != "" and price_box != 0 and price_one != 0:
+            cur.execute("""update product set name=?, brend=?, model=?, factory=?, price_box=?, price_one=? where id=?""", (name, brend, model,factory, price_box,price_one, self.data['id']))
             conn.commit()
             self.close()
             self.data['name'] = name
             self.data['brend'] = brend
             self.data['model'] = model
-            self.data['price'] = price
+            self.data['factory'] = factory
+            self.data['price_box'] = price_box
+            self.data['price_one'] = price_one
             self.closeapp.emit(self.data)
