@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Frame</class>
+ <widget class="QFrame" name="Frame">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>750</width>
+    <height>263</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Frame</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QFrame{
+	background-color: rgb(255, 255, 255);
+	border-radius:7px;
+}
+QScrollBar:horizontal {
+    border: none;
+    background: rgb(52, 59, 72);
+    height: 8px;
+    margin: 0px 0px 0 0px;
+	border-radius: 0px;
+}
+QScrollBar::handle:horizontal {
+    background: rgb(111, 162, 28);
+    min-width: 25px;
+	border-radius: 4px
+}
+QScrollBar::add-line:horizontal {
+    border: none;
+    background: rgb(55, 63, 77);
+    width: 10px;
+	border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    subcontrol-position: right;
+    subcontrol-origin: margin;
+}
+QScrollBar::sub-line:horizontal {
+    border: none;
+    background: rgb(55, 63, 77);
+    width: 20px;
+	border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    subcontrol-position: left;
+    subcontrol-origin: margin;
+}
+QScrollBar::up-arrow:horizontal, QScrollBar::down-arrow:horizontal
+{
+     background: none;
+}
+QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal
+{
+     background: none;
+}
+ QScrollBar:vertical {
+	border: none;
+    background: rgb(52, 59, 72);
+    width: 8px;
+    margin: 0px 0 0px 0;
+	border-radius: 0px;
+ }
+ QScrollBar::handle:vertical {	
+	background: rgb(111, 162, 28);
+    min-height: 25px;
+	border-radius: 4px
+ }
+ QScrollBar::add-line:vertical {
+     border: none;
+    background: rgb(55, 63, 77);
+     height: 20px;
+	border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+     subcontrol-position: bottom;
+     subcontrol-origin: margin;
+ }
+ QScrollBar::sub-line:vertical {
+	border: none;
+    background: rgb(55, 63, 77);
+     height: 20px;
+	border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+     subcontrol-position: top;
+     subcontrol-origin: margin;
+ }
+ QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical {
+     background: none;
+ }
+
+ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+     background: none;
+ }</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <property name="spacing">
+    <number>0</number>
+   </property>
+   <item row="0" column="0">
+    <widget class="QTableWidget" name="table_search">
+     <property name="font">
+      <font>
+       <family>Roboto</family>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QTableWidget{
+	border:1px solid rgba(102, 102, 102, 0.5);
+	border-radius:7px;
+	background-color: rgb(255, 255, 255);
+}
+QHeaderView::section { 
+	padding:7px;
+	font-size:12px;
+}
+QTableWidget::item:selected{
+	background-color: rgb(111, 162, 28);
+	color: rgb(255, 255, 255);
+}
+
+
+</string>
+     </property>
+     <property name="editTriggers">
+      <set>QAbstractItemView::NoEditTriggers</set>
+     </property>
+     <property name="selectionMode">
+      <enum>QAbstractItemView::ExtendedSelection</enum>
+     </property>
+     <property name="selectionBehavior">
+      <enum>QAbstractItemView::SelectRows</enum>
+     </property>
+     <property name="rowCount">
+      <number>0</number>
+     </property>
+     <attribute name="horizontalHeaderVisible">
+      <bool>true</bool>
+     </attribute>
+     <attribute name="horizontalHeaderCascadingSectionResizes">
+      <bool>true</bool>
+     </attribute>
+     <attribute name="horizontalHeaderDefaultSectionSize">
+      <number>120</number>
+     </attribute>
+     <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
+      <bool>false</bool>
+     </attribute>
+     <attribute name="horizontalHeaderStretchLastSection">
+      <bool>false</bool>
+     </attribute>
+     <attribute name="verticalHeaderVisible">
+      <bool>false</bool>
+     </attribute>
+     <attribute name="verticalHeaderDefaultSectionSize">
+      <number>30</number>
+     </attribute>
+     <attribute name="verticalHeaderHighlightSections">
+      <bool>false</bool>
+     </attribute>
+     <attribute name="verticalHeaderShowSortIndicator" stdset="0">
+      <bool>false</bool>
+     </attribute>
+     <column>
+      <property name="text">
+       <string>Id</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Махсулот</string>
+      </property>
+      <property name="font">
+       <font>
+        <family>Roboto</family>
+        <pointsize>11</pointsize>
+       </font>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Бренд</string>
+      </property>
+      <property name="font">
+       <font>
+        <family>Roboto</family>
+       </font>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Модел</string>
+      </property>
+      <property name="font">
+       <font>
+        <family>Roboto</family>
+       </font>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Завод</string>
+      </property>
+      <property name="font">
+       <font>
+        <family>Roboto</family>
+       </font>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Нархи</string>
+      </property>
+     </column>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

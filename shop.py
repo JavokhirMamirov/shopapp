@@ -2,9 +2,10 @@ import sys
 from PyQt5.QtWidgets import QMainWindow, QApplication, QPushButton, QMessageBox
 from ux import main_ux
 from libs.extra_functions import MENU_SELECTED_STYLESHEET, InsertItemToTable, TableStretchAndHide, ClearTableWidget
-from components import add_client, action_button, product_components, dollor_components
+from components import add_client, action_button, product_components, dollor_components, search_product_frame
 import sqlite3
 from PyQt5.QtCore import pyqtSignal
+from PyQt5 import QtCore
 from db.database_tables import DataBaseTableCreate
 import datetime
 #create a database or connect
@@ -25,10 +26,31 @@ class ShopApp(QMainWindow, main_ux.Ui_MainWindow):
         self.lineEdit_2.textChanged.connect(self.searchClient)
         self.listClient()
         self.listProducts()
+        self.search_product_frame = search_product_frame.SearchProduct(self)
         self.pushButton_6.clicked.connect(self.openAddProductWidow)
         self.lineEdit_3.textChanged.connect(self.searchProduct)
         self.pushButton_7.clicked.connect(self.openDollorKursiForm)
         self.setDollorKursi()
+        self.lineEdit.textChanged.connect(self.searchSavdoProduct)
+
+    def keyPressEvent(self, event):
+        if event.key() == QtCore.Qt.Key.Key_Escape:
+            if self.main_stack.currentWidget() == self.page_savdo:
+                self.lineEdit.setFocus()
+                self.search_product_frame.hide()
+        if event.key() == QtCore.Qt.Key.Key_Down:
+            if self.main_stack.currentWidget() == self.page_savdo  and  self.search_product_frame.isVisible() and self.lineEdit.hasFocus():
+                self.search_product_frame.table_search.selectRow(0)
+                self.search_product_frame.table_search.setFocus()
+
+
+    def searchSavdoProduct(self, value):
+        if value != "":
+            cur.execute("""select * from product where (name like (?) or brend like (?) or model like (?) or factory like (?)) limit 20""", (f"%{value}%", f"%{value}%", f"%{value}%", f"%{value}%"))
+            data = cur.fetchall()
+            self.search_product_frame.search_product_handler(data)
+        else:
+            self.search_product_frame.hide()
     
     def openDollorKursiForm(self):
         form = dollor_components.DollorKursiFormWindow(parent=self)
