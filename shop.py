@@ -2,19 +2,14 @@ import sys
 from PyQt5.QtWidgets import QMainWindow, QApplication, QPushButton, QMessageBox
 from ux import main_ux
 from libs.extra_functions import MENU_SELECTED_STYLESHEET, InsertItemToTable, TableStretchAndHide, ClearTableWidget
-from components import add_client, action_button
+from components import add_client, action_button, product_components
 import sqlite3
 from PyQt5.QtCore import pyqtSignal
-
+from db.database_tables import DataBaseTableCreate
 #create a database or connect
 conn = sqlite3.connect('store.db')
 cur = conn.cursor()
-cur.execute("""CREATE TABLE if not exists client(
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        name VARCHAR NOT NULL,
-        company VARCHAR NULL,
-        phone VARCHAR NULL
-    );""")
+DataBaseTableCreate(cur)
 
 class ShopApp(QMainWindow, main_ux.Ui_MainWindow):
     def __init__(self, *args, **kwargs):
@@ -26,10 +21,121 @@ class ShopApp(QMainWindow, main_ux.Ui_MainWindow):
         self.menuButtonClicked()
         self.tableWidgetSettings()
         self.addClientWindow = add_client.AddClientWindow(self)
+        self.addProductWindow = product_components.AddProductWindow(self)
         self.addClientWindow.closeapp.connect(self.closeAddClientWindow)
         self.pushButton_5.clicked.connect(self.openAddClientWindow)
         self.lineEdit_2.textChanged.connect(self.searchClient)
         self.listClient()
+        self.listProducts()
+        self.pushButton_6.clicked.connect(self.openAddProductWidow)
+        self.lineEdit_3.textChanged.connect(self.searchProduct)
+
+
+    
+    def listProducts(self):
+        cur.execute("""select * from product""")
+        data = cur.fetchall()
+        i = 0
+        for dt in data:
+            actionButtons = action_button.ActionButtons(edit=True, delete=True)
+            actionButtons.btn_edit.clicked.connect(self.productEditClick)
+            actionButtons.btn_delete.clicked.connect(self.productDeleteClick)
+            lists = [
+                dt[0],
+                i+1,
+                dt[1],
+                dt[2],
+                dt[3],
+                dt[4],
+                actionButtons,
+            ]
+            self.tableWidget_3.insertRow(i)
+            InsertItemToTable(self.tableWidget_3, i, lists, list_widget=[6])
+            i += 1
+
+
+    def searchProduct(self, value):
+        cur.execute("""select * from product where (name like (?) or brend like (?) or model like (?) )""", (f"%{value}%", f"%{value}%", f"%{value}%"))
+        data = cur.fetchall()
+        ClearTableWidget(self.tableWidget_3)
+        i = 0
+        for dt in data:
+            actionButtons = action_button.ActionButtons(edit=True, delete=True)
+            actionButtons.btn_edit.clicked.connect(self.productEditClick)
+            actionButtons.btn_delete.clicked.connect(self.productDeleteClick)
+            lists = [
+                dt[0],
+                i+1,
+                dt[1],
+                dt[2],
+                dt[3],
+                dt[4],
+                actionButtons,
+            ]
+            self.tableWidget_3.insertRow(i)
+            InsertItemToTable(self.tableWidget_3, i, lists, list_widget=[6])
+            i += 1
+    
+    def productEditClick(self):
+        row = self.tableWidget_3.indexAt(self.sender().parent().pos()).row()
+        id = self.tableWidget_3.item(row, 0).text()
+        index = self.tableWidget_3.item(row, 1).text()
+        name = self.tableWidget_3.item(row, 2).text()
+        brend = self.tableWidget_3.item(row, 3).text()
+        model = self.tableWidget_3.item(row, 4).text()
+        price = self.tableWidget_3.item(row, 5).text()
+        data = {
+            "id":id,
+            "row":row,
+            "index":index,
+            "name":name,
+            "brend":brend,
+            "model":model,
+            "price":price
+        }
+        editClientWindow = product_components.EditProductWindow(data=data, parent=self)
+        editClientWindow.closeapp.connect(self.closeEditProductWindow)
+        editClientWindow.exec()
+    
+
+    def productDeleteClick(self):
+        row = self.tableWidget_3.indexAt(self.sender().parent().pos()).row()
+        id = self.tableWidget_3.item(row, 0).text()
+        reply = QMessageBox.question(self, 'Ўчириш', "Сиз ушбу махсулотни ўчирмоқчимисиз?", QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
+        
+        if reply == QMessageBox.Yes:
+            cur.execute("""delete from product where id=?""", id)
+            conn.commit()
+            ClearTableWidget(self.tableWidget_3)
+            self.listProducts()
+        else:
+            pass
+
+    def closeEditProductWindow(self, data):
+        if data:
+            actionButtons = action_button.ActionButtons(edit=True, delete=True)
+            actionButtons.btn_edit.clicked.connect(self.productEditClick)
+            actionButtons.btn_delete.clicked.connect(self.productDeleteClick)
+            lists = [   
+                data['id'],
+                data['index'],
+                data['name'],
+                data['brend'],
+                data['model'],
+                data['price'],
+                actionButtons
+            ]
+            InsertItemToTable(self.tableWidget_3, data['row'], lists, list_widget=[6] )
+            
+    
+    def openAddProductWidow(self):
+        self.addProductWindow.closeapp.connect(self.closeAddProductWindow)
+        self.addProductWindow.exec()
+
+    def closeAddProductWindow(self, refresh):
+        if refresh:
+            ClearTableWidget(self.tableWidget_3)
+            self.listProducts()
 
     def searchClient(self, value):
         cur.execute("""select * from client where (name like (?) or company like (?) or phone like (?) )""", (f"%{value}%", f"%{value}%", f"%{value}%"))
@@ -37,16 +143,16 @@ class ShopApp(QMainWindow, main_ux.Ui_MainWindow):
         ClearTableWidget(self.tableWidget_2)
         i = 0
         for dt in data:
-            clientActionButtons = action_button.ActionButtons(edit=True, delete=True)
-            clientActionButtons.btn_edit.clicked.connect(self.clientEditClick)
-            clientActionButtons.btn_delete.clicked.connect(self.clientDeleteClick)
+            actionButtons = action_button.ActionButtons(edit=True, delete=True)
+            actionButtons.btn_edit.clicked.connect(self.clientEditClick)
+            actionButtons.btn_delete.clicked.connect(self.clientDeleteClick)
             lists = [
                 dt[0],
                 i+1,
                 dt[1],
                 dt[2],
                 dt[3],
-                clientActionButtons,
+                actionButtons,
             ]
             self.tableWidget_2.insertRow(i)
             InsertItemToTable(self.tableWidget_2, i, lists, list_widget=[5])
@@ -73,16 +179,16 @@ class ShopApp(QMainWindow, main_ux.Ui_MainWindow):
 
     def closeEditClientWindow(self, list):
         if list:
-            clientActionButtons = action_button.ActionButtons(edit=True, delete=True)
-            clientActionButtons.btn_edit.clicked.connect(self.clientEditClick)
-            clientActionButtons.btn_delete.clicked.connect(self.clientDeleteClick)
+            actionButtons = action_button.ActionButtons(edit=True, delete=True)
+            actionButtons.btn_edit.clicked.connect(self.clientEditClick)
+            actionButtons.btn_delete.clicked.connect(self.clientDeleteClick)
             lists = [   
                 list['id'],
                 list['index'],
                 list['name'],
                 list['company'],
                 list['phone'],
-                clientActionButtons
+                actionButtons
             ]
             InsertItemToTable(self.tableWidget_2,list['row'], lists, list_widget=[5] )
 
@@ -105,16 +211,16 @@ class ShopApp(QMainWindow, main_ux.Ui_MainWindow):
         data = cur.fetchall()
         i = 0
         for dt in data:
-            clientActionButtons = action_button.ActionButtons(edit=True, delete=True)
-            clientActionButtons.btn_edit.clicked.connect(self.clientEditClick)
-            clientActionButtons.btn_delete.clicked.connect(self.clientDeleteClick)
+            actionButtons = action_button.ActionButtons(edit=True, delete=True)
+            actionButtons.btn_edit.clicked.connect(self.clientEditClick)
+            actionButtons.btn_delete.clicked.connect(self.clientDeleteClick)
             lists = [
                 dt[0],
                 i+1,
                 dt[1],
                 dt[2],
                 dt[3],
-                clientActionButtons,
+                actionButtons,
             ]
             self.tableWidget_2.insertRow(i)
             InsertItemToTable(self.tableWidget_2, i, lists, list_widget=[5])
@@ -154,7 +260,7 @@ class ShopApp(QMainWindow, main_ux.Ui_MainWindow):
         TableStretchAndHide(self.tableWidget, lists_column=[2,6],sizeContent=[3,4,5,7,8,9,10], hide_column=[0])
         TableStretchAndHide(self.tableWidget_5, lists_column=[2,6],sizeContent=[3,4,5,7,8,9,10], hide_column=[0])
         TableStretchAndHide(self.tableWidget_2, lists_column=[2,3],hide_column=[0])
-        TableStretchAndHide(self.tableWidget_3, lists_column=[2],hide_column=[0])
+        TableStretchAndHide(self.tableWidget_3, lists_column=[2],hide_column=[0], sizeContent=[5,6])
         TableStretchAndHide(self.tableWidget_4, lists_column=[2],hide_column=[0])
 
 

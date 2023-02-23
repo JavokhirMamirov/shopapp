@@ -1278,7 +1278,7 @@ QScrollBar:vertical {
               <number>0</number>
              </property>
              <attribute name="horizontalHeaderVisible">
-              <bool>true</bool>
+              <bool>false</bool>
              </attribute>
              <attribute name="horizontalHeaderDefaultSectionSize">
               <number>200</number>
@@ -1952,7 +1952,7 @@ QScrollBar:vertical {
               <number>0</number>
              </property>
              <attribute name="horizontalHeaderVisible">
-              <bool>false</bool>
+              <bool>true</bool>
              </attribute>
              <attribute name="horizontalHeaderDefaultSectionSize">
               <number>250</number>
@@ -1991,6 +1991,11 @@ QScrollBar:vertical {
              <column>
               <property name="text">
                <string>Нархи $</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>Тахрирлаш</string>
               </property>
              </column>
             </widget>
