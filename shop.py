@@ -26,6 +26,7 @@ class ShopApp(QMainWindow, main_ux.Ui_MainWindow):
         self.lineEdit_2.textChanged.connect(self.searchClient)
         self.listClient()
         self.listProducts()
+        self.total_summa = 0
         self.search_product_frame = search_product_frame.SearchProduct(self)
         self.pushButton_6.clicked.connect(self.openAddProductWidow)
         self.lineEdit_3.textChanged.connect(self.searchProduct)
@@ -33,14 +34,79 @@ class ShopApp(QMainWindow, main_ux.Ui_MainWindow):
         self.setDollorKursi()
         self.lineEdit.textChanged.connect(self.searchSavdoProduct)
         self.basketList()
+        self.setClientComboboxItems()
+        self.pushButton.clicked.connect(self.saveSavdo)
+
+
+    def saveSavdo(self):
+        client = self.comboBox.currentData()
+        client_name = self.comboBox.currentText()
+        rowcount = self.tableWidget.rowCount()
+        if rowcount > 0:
+            reply = QMessageBox.question(self, 'Сотиш', f"Сиз ушбу махсулотларни << {client_name} >>га сотмоқчимисиз?", QMessageBox.Yes | QMessageBox.No, QMessageBox.Yes)
+        
+            if reply == QMessageBox.Yes:
+                cur.execute("""insert into savdo (client_id, client, summa, sana) values (?,?,?,?)""",(client, client_name, self.total_summa, datetime.datetime.today().date()))
+                conn.commit()
+                cur.execute("""select * from savdo order by id DESC""")
+                dt = cur.fetchone()
+                print(dt[0])
+                cur.execute("""update basket set savdo_id=? where savdo_id is NULL;""", (dt[0],))
+                conn.commit()
+                self.basketList()
+            else:
+                pass
+        
+
+    def setClientComboboxItems(self):
+        cur.execute("""select * from client""")
+        data = cur.fetchall()
+        self.comboBox.clear()
+        for dt in data:
+            self.comboBox.addItem(dt[1], dt[0])
 
     def basketList(self):
         cur.execute("""select * from basket where savdo_id IS NULL;""")
         data = cur.fetchall()
-        print(data)
+        ClearTableWidget(self.tableWidget)
+        i = 0
+        total_summa = 0
+        for dt in data:
+            lists = [
+                dt[0],
+                dt[2],
+                i+1,
+                dt[3],
+                dt[4],
+                dt[5],
+                dt[6],
+                dt[7],
+                dt[10],
+                dt[8],
+                f"{dt[9]:,}",
+                f"{dt[11]:,}"
+            ]
+            total_summa += dt[11]
+            self.tableWidget.insertRow(i)
+            InsertItemToTable(self.tableWidget, i, lists)
+            i += 1
+        self.label_7.setText(f"{total_summa:,} Сўм")
+        self.total_summa = total_summa
+
+
+    def deleteProductFromBasket(self):
+        row = self.tableWidget.currentRow()
+        if row >= 0:
+            id = self.tableWidget.item(row, 0).text()
+            cur.execute("""delete from basket where id=?""",(id))
+            conn.commit()
+            self.basketList()
 
     def closeAddBasketWindow(self, refresh):
         if refresh:
+            self.search_product_frame.hide()
+            self.lineEdit.setText("")
+            self.lineEdit.setFocus()
             self.basketList()
 
     def openAddBasketWindow(self, id):
@@ -63,6 +129,9 @@ class ShopApp(QMainWindow, main_ux.Ui_MainWindow):
                 r = self.search_product_frame.table_search.currentRow()
                 id = self.search_product_frame.table_search.item(r, 0).text()
                 self.openAddBasketWindow(id)
+        if event.key() == QtCore.Qt.Key.Key_Delete:
+            if self.tableWidget.hasFocus() and self.main_stack.currentWidget() == self.page_savdo:
+                self.deleteProductFromBasket()
 
 
     def searchSavdoProduct(self, value):
@@ -81,10 +150,11 @@ class ShopApp(QMainWindow, main_ux.Ui_MainWindow):
     def setDollorKursi(self):
         cur.execute("""select * from dollor""")
         row = cur.fetchone()
-        self.label_23.setText(str(row[3])+" Сўм")
+        self.label_23.setText(f"{row[3]:,} Сўм" )
         self.label_22.setText(str(row[4]))
-        self.label_20.setText(str(row[1])+" Сўм")
+        self.label_20.setText(f"{row[1]:,} Сўм")
         self.label_21.setText(str(row[2]))
+        self.label_5.setText(f"{row[1]:,} Сўм")
 
     def closeDollorKursiForm(self, price):
         cur.execute("""select * from dollor""")
@@ -333,13 +403,13 @@ class ShopApp(QMainWindow, main_ux.Ui_MainWindow):
         self.tableWidget_3.horizontalHeader().setVisible(True)
         self.tableWidget_4.horizontalHeader().setVisible(True)
 
-        self.tableWidget.setColumnWidth(1,50)
+        self.tableWidget.setColumnWidth(2,50)
         self.tableWidget_2.setColumnWidth(1,50)
         self.tableWidget_3.setColumnWidth(1,50)
         self.tableWidget_4.setColumnWidth(1,50)
         self.tableWidget_5.setColumnWidth(1,50)
 
-        TableStretchAndHide(self.tableWidget, lists_column=[2,6],sizeContent=[3,4,5,7,8,9,10], hide_column=[0])
+        TableStretchAndHide(self.tableWidget, lists_column=[3,6],sizeContent=[4,5,7,8,9,10, 11], hide_column=[0,1])
         TableStretchAndHide(self.tableWidget_5, lists_column=[2,6],sizeContent=[3,4,5,7,8,9,10], hide_column=[0])
         TableStretchAndHide(self.tableWidget_2, lists_column=[2,3],hide_column=[0])
         TableStretchAndHide(self.tableWidget_3, lists_column=[2, 5],hide_column=[0], sizeContent=[6,7,8])

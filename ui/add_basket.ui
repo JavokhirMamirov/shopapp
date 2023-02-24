@@ -505,7 +505,7 @@ QDoubleSpinBox:focus{
           </font>
          </property>
          <property name="text">
-          <string>Dona</string>
+          <string>Дона</string>
          </property>
          <property name="shortcut">
           <string>F3</string>
@@ -526,7 +526,7 @@ QDoubleSpinBox:focus{
           </font>
          </property>
          <property name="text">
-          <string>Komp</string>
+          <string>Комп</string>
          </property>
          <property name="shortcut">
           <string>F2</string>
@@ -563,7 +563,7 @@ QDoubleSpinBox:focus{
           </font>
          </property>
          <property name="text">
-          <string>Soni</string>
+          <string>Сони</string>
          </property>
         </widget>
        </item>

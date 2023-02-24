@@ -31,6 +31,14 @@ def DataBaseTableCreate(cur):
         model VARCHAR NULL,
         factory VARCHAR NULL,
         birlik VARCHAR NULL,
+        narxi_dollor REAL NOT NULL,
         narxi INTEGER NOT NULL,
         soni INTEGER NOT NULL,
         summa INTEGER NOT NULL);""")
+
+    cur.execute("""CREATE TABLE if not exists savdo(
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        client_id INTEGER NULL,
+        client VARCHAR NOT NULL,
+        summa INTEGER NOT NULL,
+        sana VARCHAR NOT NULL);""")

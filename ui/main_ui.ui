@@ -294,7 +294,7 @@ QPushButton:hover{
       <property name="styleSheet">
        <string notr="true">#main_stack{
 	border:none;
-	background-color: rgb(246, 247, 249);
+	background-color: rgb(220, 218, 247);
 }</string>
       </property>
       <widget class="QWidget" name="page_savdo">
@@ -359,13 +359,13 @@ QPushButton:hover{
             <widget class="QFrame" name="frame_3">
              <property name="minimumSize">
               <size>
-               <width>200</width>
+               <width>350</width>
                <height>80</height>
               </size>
              </property>
              <property name="maximumSize">
               <size>
-               <width>300</width>
+               <width>400</width>
                <height>100</height>
               </size>
              </property>
@@ -399,6 +399,11 @@ QPushButton:hover{
               </property>
               <item>
                <widget class="QLabel" name="label">
+                <property name="font">
+                 <font>
+                  <pointsize>12</pointsize>
+                 </font>
+                </property>
                 <property name="text">
                  <string>Қидириш</string>
                 </property>
@@ -449,7 +454,7 @@ color:#797979;
             <widget class="QFrame" name="frame_4">
              <property name="minimumSize">
               <size>
-               <width>220</width>
+               <width>300</width>
                <height>80</height>
               </size>
              </property>
@@ -490,6 +495,11 @@ color:#797979;
               </property>
               <item>
                <widget class="QLabel" name="label_3">
+                <property name="font">
+                 <font>
+                  <pointsize>12</pointsize>
+                 </font>
+                </property>
                 <property name="text">
                  <string>Мижоз</string>
                 </property>
@@ -508,6 +518,11 @@ color:#797979;
                   <width>16777215</width>
                   <height>36</height>
                  </size>
+                </property>
+                <property name="font">
+                 <font>
+                  <pointsize>11</pointsize>
+                 </font>
                 </property>
                 <property name="styleSheet">
                  <string notr="true">QComboBox{
@@ -528,26 +543,9 @@ QComboBox::down-arrow {
 	image: url(:/newPrefix/assets/down-arrow.png);
 }</string>
                 </property>
-                <item>
-                 <property name="text">
-                  <string>New Item</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>New Item</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>New Item</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>New Item</string>
-                 </property>
-                </item>
+                <property name="modelColumn">
+                 <number>0</number>
+                </property>
                </widget>
               </item>
              </layout>
@@ -719,7 +717,10 @@ color:#fff;
 	border-collapse: collapse;
 	
 }
-
+QTableWidget::item:selected{
+	background-color: rgb(111, 162, 28);
+	color: rgb(255, 255, 255);
+}
 QHeaderView::section {
     background-color: #006CFE;
     padding: 4px;
@@ -784,7 +785,7 @@ QScrollBar:vertical {
               <set>QAbstractItemView::NoEditTriggers</set>
              </property>
              <property name="selectionMode">
-              <enum>QAbstractItemView::NoSelection</enum>
+              <enum>QAbstractItemView::SingleSelection</enum>
              </property>
              <property name="selectionBehavior">
               <enum>QAbstractItemView::SelectRows</enum>
@@ -793,7 +794,7 @@ QScrollBar:vertical {
               <number>0</number>
              </property>
              <attribute name="horizontalHeaderVisible">
-              <bool>false</bool>
+              <bool>true</bool>
              </attribute>
              <attribute name="horizontalHeaderDefaultSectionSize">
               <number>130</number>
@@ -807,6 +808,11 @@ QScrollBar:vertical {
              <column>
               <property name="text">
                <string>id</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>product_id</string>
               </property>
              </column>
              <column>
@@ -826,17 +832,17 @@ QScrollBar:vertical {
              </column>
              <column>
               <property name="text">
-               <string>Бирлик</string>
-              </property>
-             </column>
-             <column>
-              <property name="text">
                <string>Бренд</string>
               </property>
              </column>
              <column>
               <property name="text">
                <string>Ишлаб Чиқаручи</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>Бирлик</string>
               </property>
              </column>
              <column>
@@ -923,6 +929,11 @@ QFrame QPushButton{
               </item>
               <item>
                <widget class="QPushButton" name="pushButton_2">
+                <property name="font">
+                 <font>
+                  <pointsize>12</pointsize>
+                 </font>
+                </property>
                 <property name="styleSheet">
                  <string notr="true">QPushButton{
 	color:#fff;
@@ -941,6 +952,11 @@ QPushButton:hover{
               </item>
               <item>
                <widget class="QPushButton" name="pushButton">
+                <property name="font">
+                 <font>
+                  <pointsize>12</pointsize>
+                 </font>
+                </property>
                 <property name="styleSheet">
                  <string notr="true">QPushButton{
 	color:#fff;
@@ -1952,7 +1968,7 @@ QScrollBar:vertical {
               <number>0</number>
              </property>
              <attribute name="horizontalHeaderVisible">
-              <bool>true</bool>
+              <bool>false</bool>
              </attribute>
              <attribute name="horizontalHeaderDefaultSectionSize">
               <number>130</number>
