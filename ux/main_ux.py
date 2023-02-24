@@ -330,6 +330,9 @@ class Ui_MainWindow(object):
         self.verticalLayout_8.setSpacing(5)
         self.verticalLayout_8.setObjectName("verticalLayout_8")
         self.tableWidget = QtWidgets.QTableWidget(self.frame_2)
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.tableWidget.setFont(font)
         self.tableWidget.setStyleSheet("QTableWidget{\n"
 "    background-color: rgb(255, 255, 255);\n"
 "    border:1px solid rgba(102, 102, 102, 0.5);\n"
@@ -451,11 +454,54 @@ class Ui_MainWindow(object):
         self.horizontalLayout_3.setObjectName("horizontalLayout_3")
         spacerItem2 = QtWidgets.QSpacerItem(931, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_3.addItem(spacerItem2)
-        self.pushButton_2 = QtWidgets.QPushButton(self.frame_7)
+        self.btn_edit = QtWidgets.QPushButton(self.frame_7)
         font = QtGui.QFont()
         font.setPointSize(12)
-        self.pushButton_2.setFont(font)
-        self.pushButton_2.setStyleSheet("QPushButton{\n"
+        self.btn_edit.setFont(font)
+        self.btn_edit.setStyleSheet("QPushButton{\n"
+"    color:#fff;\n"
+"    background-color: rgb(255, 85, 0);\n"
+"}\n"
+"\n"
+"QPushButton:hover{\n"
+"    \n"
+"    background-color: rgb(170, 85, 0);\n"
+"}")
+        self.btn_edit.setObjectName("btn_edit")
+        self.horizontalLayout_3.addWidget(self.btn_edit)
+        self.btn_new = QtWidgets.QPushButton(self.frame_7)
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.btn_new.setFont(font)
+        self.btn_new.setStyleSheet("QPushButton{\n"
+"    color:#fff;\n"
+"    background-color: rgb(0, 0, 255);\n"
+"}\n"
+"\n"
+"QPushButton:hover{\n"
+"    background-color: rgb(0, 0, 127);\n"
+"}")
+        self.btn_new.setObjectName("btn_new")
+        self.horizontalLayout_3.addWidget(self.btn_new)
+        self.btn_clear = QtWidgets.QPushButton(self.frame_7)
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.btn_clear.setFont(font)
+        self.btn_clear.setStyleSheet("QPushButton{\n"
+"    color:#fff;\n"
+"    background-color: rgb(50, 50, 50);\n"
+"}\n"
+"\n"
+"QPushButton:hover{\n"
+"    background-color: rgb(25, 25, 25);\n"
+"}")
+        self.btn_clear.setObjectName("btn_clear")
+        self.horizontalLayout_3.addWidget(self.btn_clear)
+        self.btn_print = QtWidgets.QPushButton(self.frame_7)
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.btn_print.setFont(font)
+        self.btn_print.setStyleSheet("QPushButton{\n"
 "    color:#fff;\n"
 "    background-color: rgb(53, 132, 228);\n"
 "}\n"
@@ -464,13 +510,13 @@ class Ui_MainWindow(object):
 "    \n"
 "    background-color: rgb(98, 160, 234);\n"
 "}")
-        self.pushButton_2.setObjectName("pushButton_2")
-        self.horizontalLayout_3.addWidget(self.pushButton_2)
-        self.pushButton = QtWidgets.QPushButton(self.frame_7)
+        self.btn_print.setObjectName("btn_print")
+        self.horizontalLayout_3.addWidget(self.btn_print)
+        self.btn_save = QtWidgets.QPushButton(self.frame_7)
         font = QtGui.QFont()
         font.setPointSize(12)
-        self.pushButton.setFont(font)
-        self.pushButton.setStyleSheet("QPushButton{\n"
+        self.btn_save.setFont(font)
+        self.btn_save.setStyleSheet("QPushButton{\n"
 "    color:#fff;\n"
 "    background-color: rgb(7, 76, 27);\n"
 "}\n"
@@ -478,8 +524,8 @@ class Ui_MainWindow(object):
 "QPushButton:hover{\n"
 "    background-color: rgb(46, 194, 126);\n"
 "}")
-        self.pushButton.setObjectName("pushButton")
-        self.horizontalLayout_3.addWidget(self.pushButton)
+        self.btn_save.setObjectName("btn_save")
+        self.horizontalLayout_3.addWidget(self.btn_save)
         self.verticalLayout_8.addWidget(self.frame_7)
         self.verticalLayout_3.addWidget(self.frame_2)
         self.main_stack.addWidget(self.page_savdo)
@@ -697,6 +743,9 @@ class Ui_MainWindow(object):
         self.verticalLayout_15.setSpacing(3)
         self.verticalLayout_15.setObjectName("verticalLayout_15")
         self.label_10 = QtWidgets.QLabel(self.frame_15)
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.label_10.setFont(font)
         self.label_10.setObjectName("label_10")
         self.verticalLayout_15.addWidget(self.label_10)
         self.lineEdit_4 = QtWidgets.QLineEdit(self.frame_15)
@@ -735,11 +784,18 @@ class Ui_MainWindow(object):
         self.verticalLayout_16.setSpacing(5)
         self.verticalLayout_16.setObjectName("verticalLayout_16")
         self.tableWidget_4 = QtWidgets.QTableWidget(self.frame_16)
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.tableWidget_4.setFont(font)
         self.tableWidget_4.setStyleSheet("QTableWidget{\n"
 "    background-color: rgb(255, 255, 255);\n"
 "    border:1px solid rgba(102, 102, 102, 0.5);\n"
 "    border-collapse: collapse;\n"
 "    \n"
+"}\n"
+"QTableWidget::item:selected{\n"
+"    background-color: rgb(111, 162, 28);\n"
+"    color: rgb(255, 255, 255);\n"
 "}\n"
 "QHeaderView::section {\n"
 "    background-color: #006CFE;\n"
@@ -797,11 +853,11 @@ class Ui_MainWindow(object):
         self.tableWidget_4.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAsNeeded)
         self.tableWidget_4.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAsNeeded)
         self.tableWidget_4.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
-        self.tableWidget_4.setSelectionMode(QtWidgets.QAbstractItemView.NoSelection)
+        self.tableWidget_4.setSelectionMode(QtWidgets.QAbstractItemView.SingleSelection)
         self.tableWidget_4.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
         self.tableWidget_4.setRowCount(0)
         self.tableWidget_4.setObjectName("tableWidget_4")
-        self.tableWidget_4.setColumnCount(5)
+        self.tableWidget_4.setColumnCount(6)
         item = QtWidgets.QTableWidgetItem()
         self.tableWidget_4.setHorizontalHeaderItem(0, item)
         item = QtWidgets.QTableWidgetItem()
@@ -812,8 +868,10 @@ class Ui_MainWindow(object):
         self.tableWidget_4.setHorizontalHeaderItem(3, item)
         item = QtWidgets.QTableWidgetItem()
         self.tableWidget_4.setHorizontalHeaderItem(4, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget_4.setHorizontalHeaderItem(5, item)
         self.tableWidget_4.horizontalHeader().setVisible(False)
-        self.tableWidget_4.horizontalHeader().setDefaultSectionSize(250)
+        self.tableWidget_4.horizontalHeader().setDefaultSectionSize(170)
         self.tableWidget_4.horizontalHeader().setStretchLastSection(False)
         self.tableWidget_4.verticalHeader().setVisible(False)
         self.verticalLayout_16.addWidget(self.tableWidget_4)
@@ -911,6 +969,9 @@ class Ui_MainWindow(object):
         self.verticalLayout_12.setSpacing(5)
         self.verticalLayout_12.setObjectName("verticalLayout_12")
         self.tableWidget_3 = QtWidgets.QTableWidget(self.frame_9)
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.tableWidget_3.setFont(font)
         self.tableWidget_3.setStyleSheet("QTableWidget{\n"
 "    background-color: rgb(255, 255, 255);\n"
 "    border:1px solid rgba(102, 102, 102, 0.5);\n"
@@ -1195,6 +1256,9 @@ class Ui_MainWindow(object):
         self.verticalLayout_19.setSpacing(3)
         self.verticalLayout_19.setObjectName("verticalLayout_19")
         self.label_11 = QtWidgets.QLabel(self.frame_20)
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.label_11.setFont(font)
         self.label_11.setObjectName("label_11")
         self.verticalLayout_19.addWidget(self.label_11)
         self.lineEdit_5 = QtWidgets.QLineEdit(self.frame_20)
@@ -1234,6 +1298,9 @@ class Ui_MainWindow(object):
         self.verticalLayout_20.setSpacing(3)
         self.verticalLayout_20.setObjectName("verticalLayout_20")
         self.label_12 = QtWidgets.QLabel(self.frame_21)
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.label_12.setFont(font)
         self.label_12.setObjectName("label_12")
         self.verticalLayout_20.addWidget(self.label_12)
         self.comboBox_2 = QtWidgets.QComboBox(self.frame_21)
@@ -1332,6 +1399,9 @@ class Ui_MainWindow(object):
         self.verticalLayout_18.setSpacing(5)
         self.verticalLayout_18.setObjectName("verticalLayout_18")
         self.tableWidget_5 = QtWidgets.QTableWidget(self.frame_17)
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.tableWidget_5.setFont(font)
         self.tableWidget_5.setStyleSheet("QTableWidget{\n"
 "    background-color: rgb(255, 255, 255);\n"
 "    border:1px solid rgba(102, 102, 102, 0.5);\n"
@@ -1517,8 +1587,11 @@ class Ui_MainWindow(object):
         item.setText(_translate("MainWindow", "Нархи"))
         item = self.tableWidget.horizontalHeaderItem(11)
         item.setText(_translate("MainWindow", "Сумма"))
-        self.pushButton_2.setText(_translate("MainWindow", "Печат"))
-        self.pushButton.setText(_translate("MainWindow", "Сақлаш"))
+        self.btn_edit.setText(_translate("MainWindow", "F4 Тахрирлаш"))
+        self.btn_new.setText(_translate("MainWindow", "F5 Янгилаш"))
+        self.btn_clear.setText(_translate("MainWindow", "F6 Тозалаш"))
+        self.btn_print.setText(_translate("MainWindow", "F7 Печат"))
+        self.btn_save.setText(_translate("MainWindow", "F2 Сақлаш"))
         self.label_8.setText(_translate("MainWindow", "Қидириш"))
         self.lineEdit_2.setPlaceholderText(_translate("MainWindow", "Қидириш..."))
         self.pushButton_5.setText(_translate("MainWindow", "+"))
@@ -1539,12 +1612,14 @@ class Ui_MainWindow(object):
         item = self.tableWidget_4.horizontalHeaderItem(0)
         item.setText(_translate("MainWindow", "id"))
         item = self.tableWidget_4.horizontalHeaderItem(1)
-        item.setText(_translate("MainWindow", "№"))
+        item.setText(_translate("MainWindow", "client_id"))
         item = self.tableWidget_4.horizontalHeaderItem(2)
-        item.setText(_translate("MainWindow", "Мижоз"))
+        item.setText(_translate("MainWindow", "№"))
         item = self.tableWidget_4.horizontalHeaderItem(3)
-        item.setText(_translate("MainWindow", "Сумма"))
+        item.setText(_translate("MainWindow", "Мижоз"))
         item = self.tableWidget_4.horizontalHeaderItem(4)
+        item.setText(_translate("MainWindow", "Сумма"))
+        item = self.tableWidget_4.horizontalHeaderItem(5)
         item.setText(_translate("MainWindow", "Сана"))
         self.label_9.setText(_translate("MainWindow", "Қидириш"))
         self.lineEdit_3.setPlaceholderText(_translate("MainWindow", "Қидириш..."))

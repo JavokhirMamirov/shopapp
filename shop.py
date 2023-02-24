@@ -27,6 +27,7 @@ class ShopApp(QMainWindow, main_ux.Ui_MainWindow):
         self.listClient()
         self.listProducts()
         self.total_summa = 0
+        self.savdo_id = None
         self.search_product_frame = search_product_frame.SearchProduct(self)
         self.pushButton_6.clicked.connect(self.openAddProductWidow)
         self.lineEdit_3.textChanged.connect(self.searchProduct)
@@ -35,7 +36,72 @@ class ShopApp(QMainWindow, main_ux.Ui_MainWindow):
         self.lineEdit.textChanged.connect(self.searchSavdoProduct)
         self.basketList()
         self.setClientComboboxItems()
-        self.pushButton.clicked.connect(self.saveSavdo)
+        self.btn_save.clicked.connect(self.saveSavdo)
+        self.listSavdolar()
+        self.lineEdit_4.textChanged.connect(self.listSavdolar)
+        self.showSavdoButtons()
+        self.tableWidget_4.doubleClicked.connect(self.openSavdoDetail)       
+
+    def openSavdoDetail(self):
+        row = self.tableWidget_4.currentRow()
+        if row >= 0:
+            id = self.tableWidget_4.item(row, 0).text()
+            self.savdo_id = id
+            self.basketList()
+            self.main_stack.setCurrentWidget(self.page_savdo)
+            self.showSavdoButtons()
+
+    def newSavdo(self):
+        self.savdo_id = None
+        self.basketList()
+        self.showSavdoButtons()
+
+    def clearBasket(self):
+        reply = QMessageBox.question(self, 'Ўчириш', "Сиз саватчадаги барча махсулотларни ўчирмоқчимисиз?", QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
+        
+        if reply == QMessageBox.Yes:
+            if self.savdo_id is not None:
+                cur.execute("""delete from basket where savdo_id=?""",(self.savdo_id,))
+            else:
+                cur.execute("""delete from basket where savdo_id is null""")
+            conn.commit()
+            self.basketList()
+        else:
+            pass
+        
+    def showSavdoButtons(self):
+        if self.savdo_id is None:
+            self.btn_edit.setVisible(False)
+            self.btn_print.setVisible(False)
+            self.btn_new.setVisible(False)
+        else:
+            self.btn_edit.setVisible(True)
+            self.btn_print.setVisible(True)
+            self.btn_new.setVisible(True)
+
+    def listSavdolar(self, value=None):
+        if value is not None:
+            cur.execute("""select * from savdo where client like (?) or sana like (?) order by id desc""", (f"%{value}%",f"%{value}%"))
+        else:
+            cur.execute("""select * from savdo order by id desc""")
+        
+        data = cur.fetchmany(250)
+        i = 0
+        ClearTableWidget(self.tableWidget_4)
+        for dt in data:
+            lists = [
+                dt[0],
+                dt[1],
+                i+1,
+                dt[2],
+                f"{dt[3]:,}",
+                dt[4]
+            ]
+            self.tableWidget_4.insertRow(i)
+            InsertItemToTable(self.tableWidget_4, i, lists)
+            i += 1
+        
+
 
 
     def saveSavdo(self):
@@ -46,13 +112,16 @@ class ShopApp(QMainWindow, main_ux.Ui_MainWindow):
             reply = QMessageBox.question(self, 'Сотиш', f"Сиз ушбу махсулотларни << {client_name} >>га сотмоқчимисиз?", QMessageBox.Yes | QMessageBox.No, QMessageBox.Yes)
         
             if reply == QMessageBox.Yes:
-                cur.execute("""insert into savdo (client_id, client, summa, sana) values (?,?,?,?)""",(client, client_name, self.total_summa, datetime.datetime.today().date()))
-                conn.commit()
-                cur.execute("""select * from savdo order by id DESC""")
-                dt = cur.fetchone()
-                print(dt[0])
-                cur.execute("""update basket set savdo_id=? where savdo_id is NULL;""", (dt[0],))
-                conn.commit()
+                if self.savdo_id is not None:
+                    cur.execute("""update savdo set client_id=?, client=?, summa=? where id=?""", (client, client_name, self.total_summa, self.savdo_id))
+                    conn.commit()
+                else:
+                    cur.execute("""insert into savdo (client_id, client, summa, sana) values (?,?,?,?)""",(client, client_name, self.total_summa, datetime.datetime.today().date()))
+                    conn.commit()
+                    cur.execute("""select * from savdo order by id DESC""")
+                    dt = cur.fetchone()
+                    cur.execute("""update basket set savdo_id=? where savdo_id is NULL;""", (dt[0],))
+                    conn.commit()
                 self.basketList()
             else:
                 pass
@@ -66,7 +135,10 @@ class ShopApp(QMainWindow, main_ux.Ui_MainWindow):
             self.comboBox.addItem(dt[1], dt[0])
 
     def basketList(self):
-        cur.execute("""select * from basket where savdo_id IS NULL;""")
+        if self.savdo_id is not None:
+            cur.execute("""select * from basket where savdo_id=?;""",(self.savdo_id,))
+        else:
+            cur.execute("""select * from basket where savdo_id IS NULL;""")
         data = cur.fetchall()
         ClearTableWidget(self.tableWidget)
         i = 0
@@ -92,6 +164,8 @@ class ShopApp(QMainWindow, main_ux.Ui_MainWindow):
             i += 1
         self.label_7.setText(f"{total_summa:,} Сўм")
         self.total_summa = total_summa
+        if self.savdo_id is not None:
+            cur.execute("""update savdo set summa=? where id=?""",(self.savdo_id, self.total_summa))
 
 
     def deleteProductFromBasket(self):
@@ -132,6 +206,18 @@ class ShopApp(QMainWindow, main_ux.Ui_MainWindow):
         if event.key() == QtCore.Qt.Key.Key_Delete:
             if self.tableWidget.hasFocus() and self.main_stack.currentWidget() == self.page_savdo:
                 self.deleteProductFromBasket()
+        
+        if event.key() ==  QtCore.Qt.Key.Key_F2:
+            if self.main_stack.currentWidget() == self.page_savdo and self.btn_save.isVisible():
+                self.saveSavdo()
+        
+        if event.key() ==  QtCore.Qt.Key.Key_F6:
+            if self.main_stack.currentWidget() == self.page_savdo and self.btn_clear.isVisible() and self.tableWidget.rowCount() > 0:
+                self.clearBasket()
+        
+        if event.key() ==  QtCore.Qt.Key.Key_F5:
+            if self.main_stack.currentWidget() == self.page_savdo and self.btn_new.isVisible():
+                self.newSavdo()
 
 
     def searchSavdoProduct(self, value):
@@ -406,14 +492,14 @@ class ShopApp(QMainWindow, main_ux.Ui_MainWindow):
         self.tableWidget.setColumnWidth(2,50)
         self.tableWidget_2.setColumnWidth(1,50)
         self.tableWidget_3.setColumnWidth(1,50)
-        self.tableWidget_4.setColumnWidth(1,50)
+        self.tableWidget_4.setColumnWidth(2,50)
         self.tableWidget_5.setColumnWidth(1,50)
 
         TableStretchAndHide(self.tableWidget, lists_column=[3,6],sizeContent=[4,5,7,8,9,10, 11], hide_column=[0,1])
         TableStretchAndHide(self.tableWidget_5, lists_column=[2,6],sizeContent=[3,4,5,7,8,9,10], hide_column=[0])
         TableStretchAndHide(self.tableWidget_2, lists_column=[2,3],hide_column=[0])
         TableStretchAndHide(self.tableWidget_3, lists_column=[2, 5],hide_column=[0], sizeContent=[6,7,8])
-        TableStretchAndHide(self.tableWidget_4, lists_column=[2],hide_column=[0])
+        TableStretchAndHide(self.tableWidget_4, lists_column=[3],hide_column=[0,1])
 
 
     def PageChanged(self):

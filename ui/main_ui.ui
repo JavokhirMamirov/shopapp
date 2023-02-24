@@ -710,6 +710,11 @@ color:#fff;
            </property>
            <item>
             <widget class="QTableWidget" name="tableWidget">
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
              <property name="styleSheet">
               <string notr="true">QTableWidget{
 	background-color: rgb(255, 255, 255);
@@ -928,7 +933,74 @@ QFrame QPushButton{
                </spacer>
               </item>
               <item>
-               <widget class="QPushButton" name="pushButton_2">
+               <widget class="QPushButton" name="btn_edit">
+                <property name="font">
+                 <font>
+                  <pointsize>12</pointsize>
+                 </font>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">QPushButton{
+	color:#fff;
+	background-color: rgb(255, 85, 0);
+}
+
+QPushButton:hover{
+	
+	background-color: rgb(170, 85, 0);
+}</string>
+                </property>
+                <property name="text">
+                 <string>F4 Тахрирлаш</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="btn_new">
+                <property name="font">
+                 <font>
+                  <pointsize>12</pointsize>
+                 </font>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">QPushButton{
+	color:#fff;
+	background-color: rgb(0, 0, 255);
+}
+
+QPushButton:hover{
+	background-color: rgb(0, 0, 127);
+}</string>
+                </property>
+                <property name="text">
+                 <string>F5 Янгилаш</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="btn_clear">
+                <property name="font">
+                 <font>
+                  <pointsize>12</pointsize>
+                 </font>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">QPushButton{
+	color:#fff;
+	background-color: rgb(50, 50, 50);
+}
+
+QPushButton:hover{
+	background-color: rgb(25, 25, 25);
+}</string>
+                </property>
+                <property name="text">
+                 <string>F6 Тозалаш</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="btn_print">
                 <property name="font">
                  <font>
                   <pointsize>12</pointsize>
@@ -946,12 +1018,12 @@ QPushButton:hover{
 }</string>
                 </property>
                 <property name="text">
-                 <string>Печат</string>
+                 <string>F7 Печат</string>
                 </property>
                </widget>
               </item>
               <item>
-               <widget class="QPushButton" name="pushButton">
+               <widget class="QPushButton" name="btn_save">
                 <property name="font">
                  <font>
                   <pointsize>12</pointsize>
@@ -968,7 +1040,7 @@ QPushButton:hover{
 }</string>
                 </property>
                 <property name="text">
-                 <string>Сақлаш</string>
+                 <string>F2 Сақлаш</string>
                 </property>
                </widget>
               </item>
@@ -1444,6 +1516,11 @@ QScrollBar:vertical {
               </property>
               <item>
                <widget class="QLabel" name="label_10">
+                <property name="font">
+                 <font>
+                  <pointsize>12</pointsize>
+                 </font>
+                </property>
                 <property name="text">
                  <string>Қидириш</string>
                 </property>
@@ -1537,12 +1614,21 @@ color:#797979;
            </property>
            <item>
             <widget class="QTableWidget" name="tableWidget_4">
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
              <property name="styleSheet">
               <string notr="true">QTableWidget{
 	background-color: rgb(255, 255, 255);
 	border:1px solid rgba(102, 102, 102, 0.5);
 	border-collapse: collapse;
 	
+}
+QTableWidget::item:selected{
+	background-color: rgb(111, 162, 28);
+	color: rgb(255, 255, 255);
 }
 QHeaderView::section {
     background-color: #006CFE;
@@ -1608,7 +1694,7 @@ QScrollBar:vertical {
               <set>QAbstractItemView::NoEditTriggers</set>
              </property>
              <property name="selectionMode">
-              <enum>QAbstractItemView::NoSelection</enum>
+              <enum>QAbstractItemView::SingleSelection</enum>
              </property>
              <property name="selectionBehavior">
               <enum>QAbstractItemView::SelectRows</enum>
@@ -1620,7 +1706,7 @@ QScrollBar:vertical {
               <bool>false</bool>
              </attribute>
              <attribute name="horizontalHeaderDefaultSectionSize">
-              <number>250</number>
+              <number>170</number>
              </attribute>
              <attribute name="horizontalHeaderStretchLastSection">
               <bool>false</bool>
@@ -1631,6 +1717,11 @@ QScrollBar:vertical {
              <column>
               <property name="text">
                <string>id</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>client_id</string>
               </property>
              </column>
              <column>
@@ -1888,6 +1979,11 @@ QPushButton:hover{
            </property>
            <item>
             <widget class="QTableWidget" name="tableWidget_3">
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
              <property name="styleSheet">
               <string notr="true">QTableWidget{
 	background-color: rgb(255, 255, 255);
@@ -2495,6 +2591,11 @@ text-align:right;
               </property>
               <item>
                <widget class="QLabel" name="label_11">
+                <property name="font">
+                 <font>
+                  <pointsize>12</pointsize>
+                 </font>
+                </property>
                 <property name="text">
                  <string>Қидириш</string>
                 </property>
@@ -2586,6 +2687,11 @@ color:#797979;
               </property>
               <item>
                <widget class="QLabel" name="label_12">
+                <property name="font">
+                 <font>
+                  <pointsize>12</pointsize>
+                 </font>
+                </property>
                 <property name="text">
                  <string>Мижоз</string>
                 </property>
@@ -2808,6 +2914,11 @@ color:#fff;
            </property>
            <item>
             <widget class="QTableWidget" name="tableWidget_5">
+             <property name="font">
+              <font>
+               <pointsize>12</pointsize>
+              </font>
+             </property>
              <property name="styleSheet">
               <string notr="true">QTableWidget{
 	background-color: rgb(255, 255, 255);

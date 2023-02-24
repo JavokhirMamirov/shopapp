@@ -14,6 +14,7 @@ class AddBasketWindow(QDialog, add_basket.Ui_Dialog):
         super(AddBasketWindow, self).__init__(parent)
         self.setupUi(self)
         self.id = id
+        self.parent=parent
         self.pushButton_6.clicked.connect(self.close)
         self.pushButton_7.clicked.connect(self.save)
         self.spinBox_3.selectAll()
@@ -50,15 +51,23 @@ class AddBasketWindow(QDialog, add_basket.Ui_Dialog):
             price = int(data[5]*dollor[1])
             summa = int(price*count)
             narxi_dollor = data[5]
-
-        cur.execute("""select * from basket where (product_id=? and savdo_id IS NULL)""", (self.id))
+        if self.parent.savdo_id is not None:
+            cur.execute("""select * from basket where (product_id=? and savdo_id=?)""", (self.id, self.parent.savdo_id))
+        else:
+            cur.execute("""select * from basket where (product_id=? and savdo_id IS NULL)""", (self.id))
+            
         pro = cur.fetchone()
+        print(pro)
         if pro is not None:
             cur.execute("""update basket set product_id=?, name=?, brend=?, model=?, factory=?, birlik=?,narxi_dollor=?, narxi=?, soni=?, summa=? where id=?""", (data[0], data[1], data[2], data[3], data[4], birlik,narxi_dollor, price, count, summa, pro[0]))
             conn.commit()
         else:
-            cur.execute("""insert into basket (product_id, name, brend, model, factory, birlik,narxi_dollor, narxi, soni, summa) values (?,?,?,?,?,?,?,?,?,?)""", (data[0], data[1], data[2], data[3], data[4], birlik,narxi_dollor, price, count, summa ))
-            conn.commit()
+            if self.parent.savdo_id is not None:
+                cur.execute("""insert into basket (product_id,savdo_id, name, brend, model, factory, birlik,narxi_dollor, narxi, soni, summa) values (?,?,?,?,?,?,?,?,?,?,?)""", (data[0],self.parent.savdo_id, data[1], data[2], data[3], data[4], birlik,narxi_dollor, price, count, summa ))
+                conn.commit()
+            else:
+                cur.execute("""insert into basket (product_id, name, brend, model, factory, birlik,narxi_dollor, narxi, soni, summa) values (?,?,?,?,?,?,?,?,?,?)""", (data[0], data[1], data[2], data[3], data[4], birlik,narxi_dollor, price, count, summa ))
+                conn.commit()
         self.close()
         self.closeapp.emit(True)
         
