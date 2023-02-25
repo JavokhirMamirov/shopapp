@@ -51,9 +51,8 @@ class ShopApp(QMainWindow, main_ux.Ui_MainWindow):
 
 
     def printPerview(self):
-        self.printer = QtPrintSupport.QPrinter()
+        self.printer = QtPrintSupport.QPrinter(QtPrintSupport.QPrinter.ScreenResolution)
         self.printer.setPageMargins(1,2,1,2, QtPrintSupport.QPrinter.Millimeter)
-        self.print_perview_dialog = QtPrintSupport.QPrintPreviewDialog(self.printer)
         self.print_perview_dialog.paintRequested.connect(self.handlePaintRequest)
         self.print_perview_dialog.exec_()
 
@@ -80,25 +79,9 @@ class ShopApp(QMainWindow, main_ux.Ui_MainWindow):
         total_summa = 0
         html_tr=""
         for dt in data:
-            lists = [
-                dt[0],
-                dt[2],
-                i+1,
-                dt[3],
-                dt[4],
-                dt[5],
-                dt[6],
-                dt[7],
-                dt[10],
-                dt[8],
-                f"{dt[9]:,}",
-                f"{dt[11]:,}"
-            ]
             total_summa += dt[11]
-            html_tr += f"<tr><td>{i+1}</td><td>{dt[3]}</td><td>{dt[4]}</td><td>{dt[5]}</td><td>{dt[6]}</td><td>{dt[7]}</td><td>{dt[8]}</td><td>{dt[9]:,}</td><td>{dt[11]:,}</td></tr>"
+            html_tr += f"<tr><td>{i+1}</td><td>{dt[3]}</td><td>{dt[4]}</td><td>{dt[5]}</td><td>{dt[6]}</td><td>{dt[7]}</td><td>{dt[10]}</td><td>{dt[9]:,}</td><td>{dt[11]:,}</td></tr>"
             i += 1
-        self.label_7.setText(f"{total_summa:,} Сўм")
-        self.total_summa = total_summa
         if self.savdo_id is not None:
             cur.execute("""update savdo set summa=? where id=?""",(self.total_summa, self.savdo_id))
             conn.commit()
@@ -128,6 +111,7 @@ class ShopApp(QMainWindow, main_ux.Ui_MainWindow):
                                 word-wrap: break-word;
                                 text-align: center;
                                 padding: 5px;
+                                border-collapse: collapse;
                             }
                         </style>
                     </head>
@@ -166,7 +150,6 @@ class ShopApp(QMainWindow, main_ux.Ui_MainWindow):
                 </html>"""
 
         cursor.insertHtml(html)
-        document.setDefaultStyleSheet("font-size:25px;")
         return document
 
     def openSavdoDetail(self):
