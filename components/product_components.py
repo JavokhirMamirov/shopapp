@@ -1,17 +1,14 @@
 from PyQt5.QtWidgets import QDialog, QMessageBox
 from ux import add_product, edit_product
 from PyQt5.QtCore import pyqtSignal
-import sqlite3
 
-#create a database or connect
-conn = sqlite3.connect('store.db')
-cur = conn.cursor()
 
 class AddProductWindow(QDialog, add_product.Ui_Dialog):
     closeapp = pyqtSignal(bool)
     def __init__(self, parent=None):
         super(AddProductWindow, self).__init__(parent)
         self.setupUi(self)
+        self.parent = parent
         self.pushButton_6.clicked.connect(self.close)
         self.pushButton_7.clicked.connect(self.save)
 
@@ -24,8 +21,8 @@ class AddProductWindow(QDialog, add_product.Ui_Dialog):
         price_box = self.doubleSpinBox.value()
         price_one = self.doubleSpinBox_2.value()
         if name != "" and price_box != 0 and price_one != 0:
-            cur.execute("""insert into product (name, brend, model,factory, price_box, price_one) values (?,?,?,?,?,?)""", (name, brend, model,factory,price_box, price_one))
-            conn.commit()
+            self.parent.cur.execute("""insert into product (name, brend, model,factory, price_box, price_one) values (?,?,?,?,?,?)""", (name, brend, model,factory,price_box, price_one))
+            self.parent.conn.commit()
             self.close()
             self.closeapp.emit(True)
 
@@ -34,6 +31,7 @@ class EditProductWindow(QDialog, edit_product.Ui_Dialog):
     def __init__(self, data, parent=None):
         super(EditProductWindow, self).__init__(parent)
         self.setupUi(self)
+        self.parent = parent
         self.pushButton_6.clicked.connect(self.close)
         self.pushButton_7.clicked.connect(self.save)
         self.data = data
@@ -52,8 +50,8 @@ class EditProductWindow(QDialog, edit_product.Ui_Dialog):
         price_box = self.doubleSpinBox.value()
         price_one = self.doubleSpinBox_2.value()
         if name != "" and price_box != 0 and price_one != 0:
-            cur.execute("""update product set name=?, brend=?, model=?, factory=?, price_box=?, price_one=? where id=?""", (name, brend, model,factory, price_box,price_one, self.data['id']))
-            conn.commit()
+            self.parent.cur.execute("""update product set name=?, brend=?, model=?, factory=?, price_box=?, price_one=? where id=?""", (name, brend, model,factory, price_box,price_one, self.data['id']))
+            self.parent.conn.commit()
             self.close()
             self.data['name'] = name
             self.data['brend'] = brend

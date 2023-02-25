@@ -4,10 +4,11 @@ from ux import main_ux
 from libs.extra_functions import MENU_SELECTED_STYLESHEET, InsertItemToTable, TableStretchAndHide, ClearTableWidget
 from components import add_client, action_button, product_components, dollor_components, search_product_frame, basket_components
 import sqlite3
-from PyQt5.QtCore import pyqtSignal
-from PyQt5 import QtCore
+from PyQt5 import QtCore, QtGui
 from db.database_tables import DataBaseTableCreate
 import datetime
+from PyQt5 import QtPrintSupport
+from PyQt5.QtWebEngineWidgets import QWebEngineView
 #create a database or connect
 conn = sqlite3.connect('store.db')
 cur = conn.cursor()
@@ -26,6 +27,8 @@ class ShopApp(QMainWindow, main_ux.Ui_MainWindow):
         self.lineEdit_2.textChanged.connect(self.searchClient)
         self.listClient()
         self.listProducts()
+        self.cur = cur
+        self.conn = conn
         self.total_summa = 0
         self.savdo_id = None
         self.search_product_frame = search_product_frame.SearchProduct(self)
@@ -40,7 +43,131 @@ class ShopApp(QMainWindow, main_ux.Ui_MainWindow):
         self.listSavdolar()
         self.lineEdit_4.textChanged.connect(self.listSavdolar)
         self.showSavdoButtons()
-        self.tableWidget_4.doubleClicked.connect(self.openSavdoDetail)       
+        self.tableWidget_4.doubleClicked.connect(self.openSavdoDetail)
+        self.btn_clear.clicked.connect(self.clearBasket)  
+        self.btn_edit.clicked.connect(self.clickEditButton)  
+        self.btn_new.clicked.connect(self.newSavdo)
+        self.btn_print.clicked.connect(self.printPerview)
+
+
+    def printPerview(self):
+        self.printer = QtPrintSupport.QPrinter()
+        self.printer.setPageMargins(1,2,1,2, QtPrintSupport.QPrinter.Millimeter)
+        self.print_perview_dialog = QtPrintSupport.QPrintPreviewDialog(self.printer)
+        self.print_perview_dialog.paintRequested.connect(self.handlePaintRequest)
+        self.print_perview_dialog.exec_()
+
+
+    def handlePaintRequest(self, printer):
+        document = self.makeTableDocument()
+        document.print_(printer)
+
+    def makeTableDocument(self):
+        document = QtGui.QTextDocument()
+        cursor = QtGui.QTextCursor(document)
+        document.setDocumentMargin(3)
+        cur.execute("""select * from savdo where id=?""", (self.savdo_id,))
+        savdo = cur.fetchone()
+
+        cur.execute("""select * from client where id=?""", (savdo[1],))
+        client = cur.fetchone()
+        if self.savdo_id is not None:
+            cur.execute("""select * from basket where savdo_id=?;""",(self.savdo_id,))
+        else:
+            cur.execute("""select * from basket where savdo_id IS NULL;""")
+        data = cur.fetchall()
+        i = 0
+        total_summa = 0
+        html_tr=""
+        for dt in data:
+            lists = [
+                dt[0],
+                dt[2],
+                i+1,
+                dt[3],
+                dt[4],
+                dt[5],
+                dt[6],
+                dt[7],
+                dt[10],
+                dt[8],
+                f"{dt[9]:,}",
+                f"{dt[11]:,}"
+            ]
+            total_summa += dt[11]
+            html_tr += f"<tr><td>{i+1}</td><td>{dt[3]}</td><td>{dt[4]}</td><td>{dt[5]}</td><td>{dt[6]}</td><td>{dt[7]}</td><td>{dt[8]}</td><td>{dt[9]:,}</td><td>{dt[11]:,}</td></tr>"
+            i += 1
+        self.label_7.setText(f"{total_summa:,} Сўм")
+        self.total_summa = total_summa
+        if self.savdo_id is not None:
+            cur.execute("""update savdo set summa=? where id=?""",(self.total_summa, self.savdo_id))
+            conn.commit()
+        html = """<html>
+                    <head>
+                        <style>
+                            #header {
+                                border:none;
+                                margin-bottom: 20px;
+                            }
+                            #header th, #header td{
+                                border:none;
+                                border-style:none;
+                                word-wrap: break-word;
+                                text-align: left;
+                                padding: 5px;
+                            }
+
+                            #list {
+                                border: 1px solid;
+                                border-collapse: collapse;
+                                
+                            }
+
+                            #list th, #list td {
+                                border: 1px solid;
+                                word-wrap: break-word;
+                                text-align: center;
+                                padding: 5px;
+                            }
+                        </style>
+                    </head>
+                    <body>
+                        <table id="header" width="100%">
+                            <tr>
+                                <td>Мижоз</td>
+                                <td>106</td>
+                                <td>Bizning firma</td>
+                            </tr>
+                            <tr>
+                                <td>"""+str(client[1])+"""</td>
+                                <td>Чек № """+str(savdo[0])+"""</td>
+                                <td>998989</td>
+                            </tr>
+                            <tr>
+                                <td>"""+str(client[3])+"""</td>
+                                <td></td>
+                                <td>manzil</td>
+                            </tr>
+                        </table>
+                        <table id="list"  width="100%">
+                            <tr>
+                                <th>№</th>
+                                <th>Махсулот номи</th>
+                                <th>Модел</th>
+                                <th>Бренд</th>
+                                <th>Ишлаб чиқарувчи</th>
+                                <th>Бирлиги</th>
+                                <th>Сони</th>
+                                <th>Нархи</th>
+                                <th>Сумма</th>
+                            </tr>"""+html_tr+"""
+                        </table>
+                    </body>
+                </html>"""
+
+        cursor.insertHtml(html)
+        document.setDefaultStyleSheet("font-size:25px;")
+        return document
 
     def openSavdoDetail(self):
         row = self.tableWidget_4.currentRow()
@@ -57,27 +184,50 @@ class ShopApp(QMainWindow, main_ux.Ui_MainWindow):
         self.showSavdoButtons()
 
     def clearBasket(self):
-        reply = QMessageBox.question(self, 'Ўчириш', "Сиз саватчадаги барча махсулотларни ўчирмоқчимисиз?", QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
-        
-        if reply == QMessageBox.Yes:
-            if self.savdo_id is not None:
-                cur.execute("""delete from basket where savdo_id=?""",(self.savdo_id,))
+        if self.tableWidget.rowCount() > 0:
+            reply = QMessageBox.question(self, 'Ўчириш', "Сиз саватчадаги барча махсулотларни ўчирмоқчимисиз?", QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
+            
+            if reply == QMessageBox.Yes:
+                if self.savdo_id is not None:
+                    cur.execute("""delete from basket where savdo_id=?""",(self.savdo_id,))
+                else:
+                    cur.execute("""delete from basket where savdo_id is null""")
+                conn.commit()
+                self.basketList()
             else:
-                cur.execute("""delete from basket where savdo_id is null""")
-            conn.commit()
-            self.basketList()
-        else:
-            pass
+                pass
         
     def showSavdoButtons(self):
         if self.savdo_id is None:
             self.btn_edit.setVisible(False)
             self.btn_print.setVisible(False)
             self.btn_new.setVisible(False)
+            self.btn_clear.setVisible(True)
+            self.btn_save.setVisible(True)
         else:
             self.btn_edit.setVisible(True)
             self.btn_print.setVisible(True)
             self.btn_new.setVisible(True)
+            self.btn_clear.setVisible(False)
+            self.btn_save.setVisible(False)
+    
+    def afterSavePermission(self):
+        self.lineEdit.setEnabled(False)
+        self.comboBox.setEnabled(False)
+        self.btn_clear.setVisible(False)
+        self.btn_save.setVisible(False)
+        self.btn_edit.setVisible(True)
+        self.btn_print.setVisible(True)
+        self.btn_new.setVisible(True)
+    
+    def clickEditButton(self):
+        self.lineEdit.setEnabled(True)
+        self.comboBox.setEnabled(True)
+        self.btn_clear.setVisible(True)
+        self.btn_save.setVisible(True)
+        self.btn_edit.setVisible(False)
+        self.btn_print.setVisible(False)
+        self.btn_new.setVisible(False)
 
     def listSavdolar(self, value=None):
         if value is not None:
@@ -122,10 +272,11 @@ class ShopApp(QMainWindow, main_ux.Ui_MainWindow):
                     dt = cur.fetchone()
                     cur.execute("""update basket set savdo_id=? where savdo_id is NULL;""", (dt[0],))
                     conn.commit()
+                    self.savdo_id = dt[0]
+                self.afterSavePermission()
                 self.basketList()
             else:
                 pass
-        
 
     def setClientComboboxItems(self):
         cur.execute("""select * from client""")
@@ -165,7 +316,8 @@ class ShopApp(QMainWindow, main_ux.Ui_MainWindow):
         self.label_7.setText(f"{total_summa:,} Сўм")
         self.total_summa = total_summa
         if self.savdo_id is not None:
-            cur.execute("""update savdo set summa=? where id=?""",(self.savdo_id, self.total_summa))
+            cur.execute("""update savdo set summa=? where id=?""",(self.total_summa, self.savdo_id))
+            conn.commit()
 
 
     def deleteProductFromBasket(self):
@@ -218,6 +370,10 @@ class ShopApp(QMainWindow, main_ux.Ui_MainWindow):
         if event.key() ==  QtCore.Qt.Key.Key_F5:
             if self.main_stack.currentWidget() == self.page_savdo and self.btn_new.isVisible():
                 self.newSavdo()
+        
+        if event.key() ==  QtCore.Qt.Key.Key_F4:
+            if self.main_stack.currentWidget() == self.page_savdo and self.btn_edit.isVisible():
+                self.clickEditButton()
 
 
     def searchSavdoProduct(self, value):
@@ -478,8 +634,12 @@ class ShopApp(QMainWindow, main_ux.Ui_MainWindow):
         self.btn_savdo.clicked.connect(lambda: self.main_stack.setCurrentWidget(self.page_savdo))
         self.btn_client.clicked.connect(lambda: self.main_stack.setCurrentWidget(self.page_client))
         self.btn_product.clicked.connect(lambda: self.main_stack.setCurrentWidget(self.page_maxsulotlar))
-        self.btn_savdolar.clicked.connect(lambda: self.main_stack.setCurrentWidget(self.page_savdolar))
+        self.btn_savdolar.clicked.connect(self.clickbtn_savdolar)
         self.btn_dollor.clicked.connect(lambda: self.main_stack.setCurrentWidget(self.page_dollor))
+    
+    def clickbtn_savdolar(self):
+        self.listSavdolar()
+        self.main_stack.setCurrentWidget(self.page_savdolar)
 
     
     def tableWidgetSettings(self):
@@ -544,6 +704,6 @@ class ShopApp(QMainWindow, main_ux.Ui_MainWindow):
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     window = ShopApp()
-    window.showMaximized()
+    window.show()
     sys.exit(app.exec_())
     

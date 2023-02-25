@@ -4,10 +4,6 @@ from PyQt5.QtCore import pyqtSignal
 from PyQt5 import QtCore
 import sqlite3
 
-#create a database or connect
-conn = sqlite3.connect('store.db')
-cur = conn.cursor()
-
 class AddBasketWindow(QDialog, add_basket.Ui_Dialog):
     closeapp = pyqtSignal(bool)
     def __init__(self, id, parent=None):
@@ -20,8 +16,8 @@ class AddBasketWindow(QDialog, add_basket.Ui_Dialog):
         self.spinBox_3.selectAll()
         self.setdata()
     def setdata(self):
-        cur.execute("""select * from product where id=?""",(self.id))
-        data = cur.fetchone()
+        self.parent.cur.execute("""select * from product where id=?""",(self.id))
+        data = self.parent.cur.fetchone()
         self.lineEdit_8.setText(str(data[1]))
         self.lineEdit_9.setText(str(data[3]))
         self.lineEdit_7.setText(str(data[2]))
@@ -34,10 +30,10 @@ class AddBasketWindow(QDialog, add_basket.Ui_Dialog):
             self.save()
 
     def save(self):
-        cur.execute("""select * from product where id=?""",(self.id))
-        data = cur.fetchone()
-        cur.execute("""select * from dollor""")
-        dollor = cur.fetchone()
+        self.parent.cur.execute("""select * from product where id=?""",(self.id))
+        data = self.parent.cur.fetchone()
+        self.parent.cur.execute("""select * from dollor""")
+        dollor = self.parent.cur.fetchone()
         count = self.spinBox_3.value()
         dona = self.radioButton.isChecked()
         komp = self.radioButton_2.isChecked()
@@ -52,22 +48,24 @@ class AddBasketWindow(QDialog, add_basket.Ui_Dialog):
             summa = int(price*count)
             narxi_dollor = data[5]
         if self.parent.savdo_id is not None:
-            cur.execute("""select * from basket where (product_id=? and savdo_id=?)""", (self.id, self.parent.savdo_id))
+            self.parent.cur.execute("""select * from basket where (product_id=? and savdo_id=?)""", (self.id, self.parent.savdo_id))
+            self.parent.conn.commit()
         else:
-            cur.execute("""select * from basket where (product_id=? and savdo_id IS NULL)""", (self.id))
-            
-        pro = cur.fetchone()
-        print(pro)
+            self.parent.cur.execute("""select * from basket where (product_id=? and savdo_id IS NULL)""", (self.id))
+            self.parent.conn.commit()
+        pro = self.parent.cur.fetchone()
         if pro is not None:
-            cur.execute("""update basket set product_id=?, name=?, brend=?, model=?, factory=?, birlik=?,narxi_dollor=?, narxi=?, soni=?, summa=? where id=?""", (data[0], data[1], data[2], data[3], data[4], birlik,narxi_dollor, price, count, summa, pro[0]))
-            conn.commit()
+            self.parent.cur.execute("""update basket set product_id=?, name=?, brend=?, model=?, factory=?, birlik=?,narxi_dollor=?, narxi=?, soni=?, summa=? where id=?""", (data[0], data[1], data[2], data[3], data[4], birlik,narxi_dollor, price, count, summa, pro[0]))
+            self.parent.conn.commit()
+
         else:
             if self.parent.savdo_id is not None:
-                cur.execute("""insert into basket (product_id,savdo_id, name, brend, model, factory, birlik,narxi_dollor, narxi, soni, summa) values (?,?,?,?,?,?,?,?,?,?,?)""", (data[0],self.parent.savdo_id, data[1], data[2], data[3], data[4], birlik,narxi_dollor, price, count, summa ))
-                conn.commit()
+                self.parent.cur.execute("""insert into basket (product_id,savdo_id, name, brend, model, factory, birlik,narxi_dollor, narxi, soni, summa) values (?,?,?,?,?,?,?,?,?,?,?)""", (data[0],self.parent.savdo_id, data[1], data[2], data[3], data[4], birlik,narxi_dollor, price, count, summa ))
+                self.parent.conn.commit()
+
             else:
-                cur.execute("""insert into basket (product_id, name, brend, model, factory, birlik,narxi_dollor, narxi, soni, summa) values (?,?,?,?,?,?,?,?,?,?)""", (data[0], data[1], data[2], data[3], data[4], birlik,narxi_dollor, price, count, summa ))
-                conn.commit()
+                self.parent.cur.execute("""insert into basket (product_id, name, brend, model, factory, birlik,narxi_dollor, narxi, soni, summa) values (?,?,?,?,?,?,?,?,?,?)""", (data[0], data[1], data[2], data[3], data[4], birlik,narxi_dollor, price, count, summa ))
+                self.parent.conn.commit()
         self.close()
         self.closeapp.emit(True)
         
