@@ -277,6 +277,39 @@ class ShopApp(QMainWindow, main_ux.Ui_MainWindow):
         ClearTableWidget(self.tableWidget)
         i = 0
         total_summa = 0
+        
+        # colors = [
+        #     {
+        #         'i':3,
+        #         'bg':'#92cbdf',
+        #         'color':'#fff'
+        #     },
+        #     {
+        #         'i':4,
+        #         'bg':'#be4d25',
+        #         'color':'#fff'
+        #     },
+        #     {
+        #         'i':5,
+        #         'bg':'#6c25be',
+        #         'color':'#fff'
+        #     },
+        #     {
+        #         'i':6,
+        #         'bg':'#30BE25',
+        #         'color':'#fff'
+        #     },
+        #     {
+        #         'i':7,
+        #         'bg':'#25a5be',
+        #         'color':'#fff'
+        #     },
+        #     {
+        #         'i':8,
+        #         'bg':'#92cbdf',
+        #         'color':'#fff'
+        #     },
+        # ]
         for dt in data:
             lists = [
                 dt[0],
@@ -626,7 +659,6 @@ class ShopApp(QMainWindow, main_ux.Ui_MainWindow):
 
     
     def tableWidgetSettings(self):
-        self.tableWidget_5.horizontalHeader().setVisible(True)
         self.tableWidget.horizontalHeader().setVisible(True)
         self.tableWidget_2.horizontalHeader().setVisible(True)
         self.tableWidget_3.horizontalHeader().setVisible(True)
@@ -636,10 +668,8 @@ class ShopApp(QMainWindow, main_ux.Ui_MainWindow):
         self.tableWidget_2.setColumnWidth(1,50)
         self.tableWidget_3.setColumnWidth(1,50)
         self.tableWidget_4.setColumnWidth(2,50)
-        self.tableWidget_5.setColumnWidth(1,50)
 
         TableStretchAndHide(self.tableWidget, lists_column=[3,6],sizeContent=[4,5,7,8,9,10, 11], hide_column=[0,1])
-        TableStretchAndHide(self.tableWidget_5, lists_column=[2,6],sizeContent=[3,4,5,7,8,9,10], hide_column=[0])
         TableStretchAndHide(self.tableWidget_2, lists_column=[2,3],hide_column=[0])
         TableStretchAndHide(self.tableWidget_3, lists_column=[2, 5],hide_column=[0], sizeContent=[6,7,8])
         TableStretchAndHide(self.tableWidget_4, lists_column=[3],hide_column=[0,1])

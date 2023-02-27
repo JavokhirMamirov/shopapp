@@ -1,6 +1,6 @@
 from PyQt5 import QtWidgets, QtCore
 from PyQt5.QtCore import QRectF, QPoint
-from PyQt5.QtGui import QPainter, QFont, QFontMetrics
+from PyQt5.QtGui import QPainter, QFont, QFontMetrics, QColor
 from PyQt5.QtPrintSupport import QPrinter
 from PyQt5.QtWidgets import QTableWidgetItem, QHeaderView, QLabel
 
@@ -34,7 +34,7 @@ def TableStretchAndHide(table, lists_column=None, all=False, sizeContent=None, h
             header.setSectionResizeMode(h, QHeaderView.ResizeToContents)
 
 
-def InsertItemToTable(table, row, lists, list_widget=[]):
+def InsertItemToTable(table, row, lists, list_widget=[], colors=[]):
     i = 0
     for list in lists:
         if i in list_widget:
@@ -44,6 +44,12 @@ def InsertItemToTable(table, row, lists, list_widget=[]):
                 list = ""
             item = QtWidgets.QTableWidgetItem(str(list))
             item.setTextAlignment(QtCore.Qt.AlignCenter)
+            for cl in colors:
+                if i == cl['i']:
+                    if cl['bg'] != None:
+                        item.setBackground(QColor(cl['bg']))
+                    if cl['color'] != None:
+                        item.setForeground(QColor(cl['color']))
             table.setItem(row, i, item)
         i += 1
 

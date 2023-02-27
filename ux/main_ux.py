@@ -428,7 +428,7 @@ class Ui_MainWindow(object):
         self.tableWidget.setHorizontalHeaderItem(10, item)
         item = QtWidgets.QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(11, item)
-        self.tableWidget.horizontalHeader().setVisible(True)
+        self.tableWidget.horizontalHeader().setVisible(False)
         self.tableWidget.horizontalHeader().setDefaultSectionSize(130)
         self.tableWidget.horizontalHeader().setStretchLastSection(False)
         self.tableWidget.verticalHeader().setVisible(False)
@@ -564,6 +564,9 @@ class Ui_MainWindow(object):
         self.verticalLayout_10.setSpacing(3)
         self.verticalLayout_10.setObjectName("verticalLayout_10")
         self.label_8 = QtWidgets.QLabel(self.frame_11)
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.label_8.setFont(font)
         self.label_8.setObjectName("label_8")
         self.verticalLayout_10.addWidget(self.label_8)
         self.lineEdit_2 = QtWidgets.QLineEdit(self.frame_11)
@@ -911,6 +914,9 @@ class Ui_MainWindow(object):
         self.verticalLayout_11.setSpacing(3)
         self.verticalLayout_11.setObjectName("verticalLayout_11")
         self.label_9 = QtWidgets.QLabel(self.frame_13)
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.label_9.setFont(font)
         self.label_9.setObjectName("label_9")
         self.verticalLayout_11.addWidget(self.label_9)
         self.lineEdit_3 = QtWidgets.QLineEdit(self.frame_13)
@@ -1222,325 +1228,6 @@ class Ui_MainWindow(object):
         self.gridLayout_2.setColumnStretch(2, 5)
         self.gridLayout_2.setColumnStretch(3, 4)
         self.main_stack.addWidget(self.page_dollor)
-        self.page_shop_detail = QtWidgets.QWidget()
-        self.page_shop_detail.setObjectName("page_shop_detail")
-        self.verticalLayout_23 = QtWidgets.QVBoxLayout(self.page_shop_detail)
-        self.verticalLayout_23.setContentsMargins(0, 0, 0, 0)
-        self.verticalLayout_23.setSpacing(0)
-        self.verticalLayout_23.setObjectName("verticalLayout_23")
-        self.frame_19 = QtWidgets.QFrame(self.page_shop_detail)
-        self.frame_19.setMinimumSize(QtCore.QSize(0, 120))
-        self.frame_19.setMaximumSize(QtCore.QSize(16777215, 120))
-        self.frame_19.setStyleSheet("QFrame{\n"
-"    border:none;\n"
-"}")
-        self.frame_19.setFrameShape(QtWidgets.QFrame.StyledPanel)
-        self.frame_19.setFrameShadow(QtWidgets.QFrame.Raised)
-        self.frame_19.setObjectName("frame_19")
-        self.horizontalLayout_8 = QtWidgets.QHBoxLayout(self.frame_19)
-        self.horizontalLayout_8.setContentsMargins(25, 8, 20, 8)
-        self.horizontalLayout_8.setSpacing(20)
-        self.horizontalLayout_8.setObjectName("horizontalLayout_8")
-        self.frame_20 = QtWidgets.QFrame(self.frame_19)
-        self.frame_20.setMinimumSize(QtCore.QSize(200, 80))
-        self.frame_20.setMaximumSize(QtCore.QSize(300, 100))
-        self.frame_20.setStyleSheet("QFrame{\n"
-"    background-color: rgb(255, 255, 255);\n"
-"    border-radius:7px;\n"
-"}")
-        self.frame_20.setFrameShape(QtWidgets.QFrame.StyledPanel)
-        self.frame_20.setFrameShadow(QtWidgets.QFrame.Raised)
-        self.frame_20.setObjectName("frame_20")
-        self.verticalLayout_19 = QtWidgets.QVBoxLayout(self.frame_20)
-        self.verticalLayout_19.setContentsMargins(5, 10, 5, 15)
-        self.verticalLayout_19.setSpacing(3)
-        self.verticalLayout_19.setObjectName("verticalLayout_19")
-        self.label_11 = QtWidgets.QLabel(self.frame_20)
-        font = QtGui.QFont()
-        font.setPointSize(12)
-        self.label_11.setFont(font)
-        self.label_11.setObjectName("label_11")
-        self.verticalLayout_19.addWidget(self.label_11)
-        self.lineEdit_5 = QtWidgets.QLineEdit(self.frame_20)
-        self.lineEdit_5.setMinimumSize(QtCore.QSize(0, 36))
-        self.lineEdit_5.setMaximumSize(QtCore.QSize(16777215, 36))
-        font = QtGui.QFont()
-        font.setPointSize(12)
-        self.lineEdit_5.setFont(font)
-        self.lineEdit_5.setStyleSheet("QLineEdit{\n"
-"    border:none;\n"
-"    border-radius:8px;\n"
-"    background-color: #F2F3F7;\n"
-"    padding-left:8px;\n"
-"    padding-right: 30px;\n"
-"color:#797979;\n"
-"    background-image: url(:/newPrefix/assets/search.png);\n"
-"    background-repeat:no-repeat;\n"
-"    background-position: right center;\n"
-"\n"
-"}")
-        self.lineEdit_5.setObjectName("lineEdit_5")
-        self.verticalLayout_19.addWidget(self.lineEdit_5)
-        self.horizontalLayout_8.addWidget(self.frame_20)
-        self.frame_21 = QtWidgets.QFrame(self.frame_19)
-        self.frame_21.setMinimumSize(QtCore.QSize(220, 80))
-        self.frame_21.setMaximumSize(QtCore.QSize(300, 100))
-        self.frame_21.setStyleSheet("QFrame{\n"
-"    border:none;\n"
-"    border-radius:7px;\n"
-"    background-color: rgb(255, 255, 255);\n"
-"}")
-        self.frame_21.setFrameShape(QtWidgets.QFrame.StyledPanel)
-        self.frame_21.setFrameShadow(QtWidgets.QFrame.Raised)
-        self.frame_21.setObjectName("frame_21")
-        self.verticalLayout_20 = QtWidgets.QVBoxLayout(self.frame_21)
-        self.verticalLayout_20.setContentsMargins(5, 10, 5, 15)
-        self.verticalLayout_20.setSpacing(3)
-        self.verticalLayout_20.setObjectName("verticalLayout_20")
-        self.label_12 = QtWidgets.QLabel(self.frame_21)
-        font = QtGui.QFont()
-        font.setPointSize(12)
-        self.label_12.setFont(font)
-        self.label_12.setObjectName("label_12")
-        self.verticalLayout_20.addWidget(self.label_12)
-        self.comboBox_2 = QtWidgets.QComboBox(self.frame_21)
-        self.comboBox_2.setMinimumSize(QtCore.QSize(0, 36))
-        self.comboBox_2.setMaximumSize(QtCore.QSize(16777215, 36))
-        self.comboBox_2.setStyleSheet("QComboBox{\n"
-"    border:none;\n"
-"    background-color:#F2F3F7;\n"
-"    color:#1B252E;\n"
-"    border-radius:8px;\n"
-"}\n"
-"\n"
-"QComboBox::drop-down {\n"
-"subcontrol-origin: padding; \n"
-"subcontrol-position: top right;\n"
-"width: 20px; \n"
-"border-top-right-radius: 3px; \n"
-"border-bottom-right-radius: 3px;}\n"
-"\n"
-"QComboBox::down-arrow {\n"
-"    image: url(:/newPrefix/assets/down-arrow.png);\n"
-"}")
-        self.comboBox_2.setObjectName("comboBox_2")
-        self.comboBox_2.addItem("")
-        self.comboBox_2.addItem("")
-        self.comboBox_2.addItem("")
-        self.comboBox_2.addItem("")
-        self.verticalLayout_20.addWidget(self.comboBox_2)
-        self.horizontalLayout_8.addWidget(self.frame_21)
-        self.frame_22 = QtWidgets.QFrame(self.frame_19)
-        self.frame_22.setMinimumSize(QtCore.QSize(160, 80))
-        self.frame_22.setMaximumSize(QtCore.QSize(160, 100))
-        self.frame_22.setStyleSheet("QFrame{\n"
-"    border:none;\n"
-"    border-radius:7px;\n"
-"    background-color:#2FB4FF;\n"
-"color:#fff;\n"
-"}")
-        self.frame_22.setFrameShape(QtWidgets.QFrame.StyledPanel)
-        self.frame_22.setFrameShadow(QtWidgets.QFrame.Raised)
-        self.frame_22.setObjectName("frame_22")
-        self.verticalLayout_21 = QtWidgets.QVBoxLayout(self.frame_22)
-        self.verticalLayout_21.setObjectName("verticalLayout_21")
-        self.label_13 = QtWidgets.QLabel(self.frame_22)
-        font = QtGui.QFont()
-        font.setPointSize(10)
-        self.label_13.setFont(font)
-        self.label_13.setObjectName("label_13")
-        self.verticalLayout_21.addWidget(self.label_13)
-        self.label_14 = QtWidgets.QLabel(self.frame_22)
-        font = QtGui.QFont()
-        font.setPointSize(16)
-        self.label_14.setFont(font)
-        self.label_14.setObjectName("label_14")
-        self.verticalLayout_21.addWidget(self.label_14)
-        self.horizontalLayout_8.addWidget(self.frame_22)
-        self.frame_23 = QtWidgets.QFrame(self.frame_19)
-        self.frame_23.setMinimumSize(QtCore.QSize(160, 80))
-        self.frame_23.setMaximumSize(QtCore.QSize(160, 100))
-        self.frame_23.setStyleSheet("QFrame{\n"
-"    border:none;\n"
-"    border-radius:7px;\n"
-"    background-color:#446FDE;\n"
-"color:#fff;\n"
-"}")
-        self.frame_23.setFrameShape(QtWidgets.QFrame.StyledPanel)
-        self.frame_23.setFrameShadow(QtWidgets.QFrame.Raised)
-        self.frame_23.setObjectName("frame_23")
-        self.verticalLayout_22 = QtWidgets.QVBoxLayout(self.frame_23)
-        self.verticalLayout_22.setObjectName("verticalLayout_22")
-        self.label_15 = QtWidgets.QLabel(self.frame_23)
-        font = QtGui.QFont()
-        font.setPointSize(10)
-        self.label_15.setFont(font)
-        self.label_15.setObjectName("label_15")
-        self.verticalLayout_22.addWidget(self.label_15)
-        self.label_16 = QtWidgets.QLabel(self.frame_23)
-        font = QtGui.QFont()
-        font.setPointSize(16)
-        self.label_16.setFont(font)
-        self.label_16.setObjectName("label_16")
-        self.verticalLayout_22.addWidget(self.label_16)
-        self.horizontalLayout_8.addWidget(self.frame_23)
-        spacerItem11 = QtWidgets.QSpacerItem(255, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout_8.addItem(spacerItem11)
-        self.verticalLayout_23.addWidget(self.frame_19)
-        self.frame_17 = QtWidgets.QFrame(self.page_shop_detail)
-        self.frame_17.setStyleSheet("QFrame{\n"
-"    border:none;\n"
-"}")
-        self.frame_17.setFrameShape(QtWidgets.QFrame.StyledPanel)
-        self.frame_17.setFrameShadow(QtWidgets.QFrame.Raised)
-        self.frame_17.setObjectName("frame_17")
-        self.verticalLayout_18 = QtWidgets.QVBoxLayout(self.frame_17)
-        self.verticalLayout_18.setContentsMargins(25, 10, 20, 10)
-        self.verticalLayout_18.setSpacing(5)
-        self.verticalLayout_18.setObjectName("verticalLayout_18")
-        self.tableWidget_5 = QtWidgets.QTableWidget(self.frame_17)
-        font = QtGui.QFont()
-        font.setPointSize(12)
-        self.tableWidget_5.setFont(font)
-        self.tableWidget_5.setStyleSheet("QTableWidget{\n"
-"    background-color: rgb(255, 255, 255);\n"
-"    border:1px solid rgba(102, 102, 102, 0.5);\n"
-"    border-collapse: collapse;\n"
-"    \n"
-"}\n"
-"QHeaderView::section {\n"
-"    background-color: #006CFE;\n"
-"    padding: 4px;\n"
-"    font-size: 14px;\n"
-"    color:#fff;\n"
-"    border-style: none;\n"
-"    border-right:1px solid rgb(154, 153, 150);\n"
-"}\n"
-"\n"
-" QScrollBar:horizontal {\n"
-"        border: none;\n"
-"        background: #F5F5F5;\n"
-"        height: 10px;\n"
-"        margin: 0px 21px 0 21px;\n"
-"    }\n"
-"\n"
-"    QScrollBar::handle:horizontal {\n"
-"        background: #C0C0C0;\n"
-"        min-width: 20px;\n"
-"    }\n"
-"\n"
-"    QScrollBar::add-line:horizontal {\n"
-"        border: none;\n"
-"        background: none;\n"
-"    }\n"
-"\n"
-"    QScrollBar::sub-line:horizontal {\n"
-"        border: none;\n"
-"        background: none;\n"
-"    }\n"
-"\n"
-"QScrollBar:vertical {\n"
-"        border: none;\n"
-"        background: #F5F5F5;\n"
-"        width: 10px;\n"
-"        margin: 21px 0 21px 0;\n"
-"    }\n"
-"\n"
-"    QScrollBar::handle:vertical {\n"
-"        background: #C0C0C0;\n"
-"        min-height: 20px;\n"
-"    }\n"
-"\n"
-"    QScrollBar::add-line:vertical {\n"
-"        border: none;\n"
-"        background: none;\n"
-"    }\n"
-"\n"
-"    QScrollBar::sub-line:vertical {\n"
-"        border: none;\n"
-"        background: none;\n"
-"    }\n"
-"")
-        self.tableWidget_5.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAsNeeded)
-        self.tableWidget_5.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAsNeeded)
-        self.tableWidget_5.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
-        self.tableWidget_5.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
-        self.tableWidget_5.setRowCount(0)
-        self.tableWidget_5.setObjectName("tableWidget_5")
-        self.tableWidget_5.setColumnCount(11)
-        item = QtWidgets.QTableWidgetItem()
-        self.tableWidget_5.setHorizontalHeaderItem(0, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.tableWidget_5.setHorizontalHeaderItem(1, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.tableWidget_5.setHorizontalHeaderItem(2, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.tableWidget_5.setHorizontalHeaderItem(3, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.tableWidget_5.setHorizontalHeaderItem(4, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.tableWidget_5.setHorizontalHeaderItem(5, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.tableWidget_5.setHorizontalHeaderItem(6, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.tableWidget_5.setHorizontalHeaderItem(7, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.tableWidget_5.setHorizontalHeaderItem(8, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.tableWidget_5.setHorizontalHeaderItem(9, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.tableWidget_5.setHorizontalHeaderItem(10, item)
-        self.tableWidget_5.horizontalHeader().setVisible(False)
-        self.tableWidget_5.horizontalHeader().setStretchLastSection(False)
-        self.tableWidget_5.verticalHeader().setVisible(False)
-        self.verticalLayout_18.addWidget(self.tableWidget_5)
-        self.frame_18 = QtWidgets.QFrame(self.frame_17)
-        self.frame_18.setMinimumSize(QtCore.QSize(0, 40))
-        self.frame_18.setMaximumSize(QtCore.QSize(16777215, 40))
-        self.frame_18.setStyleSheet("QFrame {\n"
-"    border:none;\n"
-"}\n"
-"\n"
-"QFrame QPushButton{\n"
-"    border:none;\n"
-"    border-radius:7px;\n"
-"    padding:10px;\n"
-"}")
-        self.frame_18.setFrameShape(QtWidgets.QFrame.StyledPanel)
-        self.frame_18.setFrameShadow(QtWidgets.QFrame.Raised)
-        self.frame_18.setObjectName("frame_18")
-        self.horizontalLayout_4 = QtWidgets.QHBoxLayout(self.frame_18)
-        self.horizontalLayout_4.setContentsMargins(0, 0, 0, 0)
-        self.horizontalLayout_4.setSpacing(15)
-        self.horizontalLayout_4.setObjectName("horizontalLayout_4")
-        spacerItem12 = QtWidgets.QSpacerItem(931, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout_4.addItem(spacerItem12)
-        self.pushButton_3 = QtWidgets.QPushButton(self.frame_18)
-        self.pushButton_3.setStyleSheet("QPushButton{\n"
-"    color:#fff;\n"
-"    background-color: rgb(53, 132, 228);\n"
-"}\n"
-"\n"
-"QPushButton:hover{\n"
-"    \n"
-"    background-color: rgb(98, 160, 234);\n"
-"}")
-        self.pushButton_3.setObjectName("pushButton_3")
-        self.horizontalLayout_4.addWidget(self.pushButton_3)
-        self.pushButton_4 = QtWidgets.QPushButton(self.frame_18)
-        self.pushButton_4.setStyleSheet("QPushButton{\n"
-"    color:#fff;\n"
-"    background-color: rgb(7, 76, 27);\n"
-"}\n"
-"\n"
-"QPushButton:hover{\n"
-"    background-color: rgb(46, 194, 126);\n"
-"}")
-        self.pushButton_4.setObjectName("pushButton_4")
-        self.horizontalLayout_4.addWidget(self.pushButton_4)
-        self.verticalLayout_18.addWidget(self.frame_18)
-        self.verticalLayout_23.addWidget(self.frame_17)
-        self.main_stack.addWidget(self.page_shop_detail)
         self.horizontalLayout.addWidget(self.main_stack)
         self.horizontalLayout.setStretch(0, 1)
         MainWindow.setCentralWidget(self.centralwidget)
@@ -1650,41 +1337,6 @@ class Ui_MainWindow(object):
         self.label_19.setText(_translate("MainWindow", "Эски курс"))
         self.label_23.setText(_translate("MainWindow", "11, 800 s"))
         self.label_22.setText(_translate("MainWindow", "02.02.2023"))
-        self.label_11.setText(_translate("MainWindow", "Қидириш"))
-        self.lineEdit_5.setPlaceholderText(_translate("MainWindow", "Қидириш..."))
-        self.label_12.setText(_translate("MainWindow", "Мижоз"))
-        self.comboBox_2.setItemText(0, _translate("MainWindow", "New Item"))
-        self.comboBox_2.setItemText(1, _translate("MainWindow", "New Item"))
-        self.comboBox_2.setItemText(2, _translate("MainWindow", "New Item"))
-        self.comboBox_2.setItemText(3, _translate("MainWindow", "New Item"))
-        self.label_13.setText(_translate("MainWindow", "Доллор курси"))
-        self.label_14.setText(_translate("MainWindow", "11,400"))
-        self.label_15.setText(_translate("MainWindow", "Умумий сумма"))
-        self.label_16.setText(_translate("MainWindow", "12,540,600"))
-        item = self.tableWidget_5.horizontalHeaderItem(0)
-        item.setText(_translate("MainWindow", "id"))
-        item = self.tableWidget_5.horizontalHeaderItem(1)
-        item.setText(_translate("MainWindow", "№"))
-        item = self.tableWidget_5.horizontalHeaderItem(2)
-        item.setText(_translate("MainWindow", "Махсулот"))
-        item = self.tableWidget_5.horizontalHeaderItem(3)
-        item.setText(_translate("MainWindow", "модел"))
-        item = self.tableWidget_5.horizontalHeaderItem(4)
-        item.setText(_translate("MainWindow", "Бирлик"))
-        item = self.tableWidget_5.horizontalHeaderItem(5)
-        item.setText(_translate("MainWindow", "Бренд"))
-        item = self.tableWidget_5.horizontalHeaderItem(6)
-        item.setText(_translate("MainWindow", "Ишлаб Чиқаручи"))
-        item = self.tableWidget_5.horizontalHeaderItem(7)
-        item.setText(_translate("MainWindow", "Сони"))
-        item = self.tableWidget_5.horizontalHeaderItem(8)
-        item.setText(_translate("MainWindow", "$"))
-        item = self.tableWidget_5.horizontalHeaderItem(9)
-        item.setText(_translate("MainWindow", "Нархи"))
-        item = self.tableWidget_5.horizontalHeaderItem(10)
-        item.setText(_translate("MainWindow", "Сумма"))
-        self.pushButton_3.setText(_translate("MainWindow", "Печат"))
-        self.pushButton_4.setText(_translate("MainWindow", "Сақлаш"))
 import resources_rc
 
 

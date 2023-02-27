@@ -486,6 +486,11 @@ QDoubleSpinBox:focus{
      </item>
      <item>
       <widget class="QPushButton" name="pushButton_6">
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
        <property name="styleSheet">
         <string notr="true">QPushButton{
 	border:none;
@@ -509,6 +514,11 @@ QPushButton:hover{
      </item>
      <item>
       <widget class="QPushButton" name="pushButton_7">
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
        <property name="styleSheet">
         <string notr="true">QPushButton{
 	border:none;
