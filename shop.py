@@ -52,7 +52,7 @@ class ShopApp(QMainWindow, main_ux.Ui_MainWindow):
 
     def printPerview(self):
         self.printer = QtPrintSupport.QPrinter(QtPrintSupport.QPrinter.ScreenResolution)
-        self.printer.setPageMargins(1,2,1,2, QtPrintSupport.QPrinter.Millimeter)
+        self.print_perview_dialog = QtPrintSupport.QPrintPreviewDialog(self.printer)
         self.print_perview_dialog.paintRequested.connect(self.handlePaintRequest)
         self.print_perview_dialog.exec_()
 
