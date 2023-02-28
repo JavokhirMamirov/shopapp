@@ -507,9 +507,6 @@ QDoubleSpinBox:focus{
          <property name="text">
           <string>Дона</string>
          </property>
-         <property name="shortcut">
-          <string>F3</string>
-         </property>
          <property name="checked">
           <bool>true</bool>
          </property>
@@ -527,9 +524,6 @@ QDoubleSpinBox:focus{
          </property>
          <property name="text">
           <string>Комп</string>
-         </property>
-         <property name="shortcut">
-          <string>F2</string>
          </property>
          <property name="autoRepeat">
           <bool>false</bool>
@@ -665,9 +659,6 @@ QPushButton:hover{
        <property name="text">
         <string>Бекор қилиш</string>
        </property>
-       <property name="shortcut">
-        <string>Esc</string>
-       </property>
       </widget>
      </item>
      <item>
@@ -694,9 +685,6 @@ QPushButton:hover{
        <property name="text">
         <string>Қўшиш</string>
        </property>
-       <property name="shortcut">
-        <string>Return, Enter</string>
-       </property>
       </widget>
      </item>
     </layout>
@@ -704,17 +692,17 @@ QPushButton:hover{
   </layout>
  </widget>
  <tabstops>
-  <tabstop>spinBox_3</tabstop>
-  <tabstop>radioButton_2</tabstop>
-  <tabstop>radioButton</tabstop>
+  <tabstop>pushButton_7</tabstop>
+  <tabstop>pushButton_6</tabstop>
+  <tabstop>doubleSpinBox_2</tabstop>
   <tabstop>lineEdit_8</tabstop>
   <tabstop>lineEdit_7</tabstop>
   <tabstop>lineEdit_9</tabstop>
   <tabstop>lineEdit_10</tabstop>
   <tabstop>doubleSpinBox</tabstop>
-  <tabstop>doubleSpinBox_2</tabstop>
-  <tabstop>pushButton_6</tabstop>
-  <tabstop>pushButton_7</tabstop>
+  <tabstop>radioButton</tabstop>
+  <tabstop>radioButton_2</tabstop>
+  <tabstop>spinBox_3</tabstop>
  </tabstops>
  <resources>
   <include location="../resources.qrc"/>

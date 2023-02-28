@@ -339,16 +339,16 @@ class Ui_Dialog(object):
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
-        Dialog.setTabOrder(self.spinBox_3, self.radioButton_2)
-        Dialog.setTabOrder(self.radioButton_2, self.radioButton)
-        Dialog.setTabOrder(self.radioButton, self.lineEdit_8)
+        Dialog.setTabOrder(self.pushButton_7, self.pushButton_6)
+        Dialog.setTabOrder(self.pushButton_6, self.doubleSpinBox_2)
+        Dialog.setTabOrder(self.doubleSpinBox_2, self.lineEdit_8)
         Dialog.setTabOrder(self.lineEdit_8, self.lineEdit_7)
         Dialog.setTabOrder(self.lineEdit_7, self.lineEdit_9)
         Dialog.setTabOrder(self.lineEdit_9, self.lineEdit_10)
         Dialog.setTabOrder(self.lineEdit_10, self.doubleSpinBox)
-        Dialog.setTabOrder(self.doubleSpinBox, self.doubleSpinBox_2)
-        Dialog.setTabOrder(self.doubleSpinBox_2, self.pushButton_6)
-        Dialog.setTabOrder(self.pushButton_6, self.pushButton_7)
+        Dialog.setTabOrder(self.doubleSpinBox, self.radioButton)
+        Dialog.setTabOrder(self.radioButton, self.radioButton_2)
+        Dialog.setTabOrder(self.radioButton_2, self.spinBox_3)
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
@@ -364,14 +364,10 @@ class Ui_Dialog(object):
         self.label_10.setText(_translate("Dialog", "Нархи комп $"))
         self.label_11.setText(_translate("Dialog", "Нархи дона $"))
         self.radioButton.setText(_translate("Dialog", "Дона"))
-        self.radioButton.setShortcut(_translate("Dialog", "F3"))
         self.radioButton_2.setText(_translate("Dialog", "Комп"))
-        self.radioButton_2.setShortcut(_translate("Dialog", "F2"))
         self.label_13.setText(_translate("Dialog", "Сони"))
         self.pushButton_6.setText(_translate("Dialog", "Бекор қилиш"))
-        self.pushButton_6.setShortcut(_translate("Dialog", "Esc"))
         self.pushButton_7.setText(_translate("Dialog", "Қўшиш"))
-        self.pushButton_7.setShortcut(_translate("Dialog", "Return, Enter"))
 import resources_rc
 
 

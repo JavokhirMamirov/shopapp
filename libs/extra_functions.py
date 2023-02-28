@@ -58,3 +58,26 @@ MENU_SELECTED_STYLESHEET = """QPushButton{
     background-color:#006CFE;
 	color:#FFF;
 }"""
+
+
+def PrintChek(text):
+    printer = QPrinter(QPrinter.HighResolution)
+    printer.setPageMargins(0.0, 0.0, 0.0, 0.0, QPrinter.Point)
+    printer.setFullPage(True)
+    size = printer.paperSize(QPrinter.DevicePixel)
+    width = size.width()
+    painter = QPainter()
+    painter.begin(printer)
+    font = QFont()
+    label = QLabel()
+    font.setPointSize(8)
+    label.setFont(font)
+    label.setMaximumWidth(width)
+    font_metric = QFontMetrics(QFont())
+    text_size = font_metric.size(QtCore.Qt.AlignCenter | QtCore.Qt.TextWordWrap, text)
+    end = text_size
+    pen = painter.pen()
+    pen.setStyle(QtCore.Qt.DotLine)
+    painter.setPen(pen)
+    painter.drawText(QRectF(0, 0, width, end.height()), QtCore.Qt.AlignLeft  | QtCore.Qt.TextWordWrap, text)
+    painter.end()

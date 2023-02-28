@@ -11,6 +11,7 @@ class AddBasketWindow(QDialog, add_basket.Ui_Dialog):
         self.setupUi(self)
         self.id = id
         self.parent=parent
+        self.spinBox_3.setFocus()
         self.pushButton_6.clicked.connect(self.close)
         self.pushButton_7.clicked.connect(self.save)
         self.spinBox_3.selectAll()
@@ -31,6 +32,15 @@ class AddBasketWindow(QDialog, add_basket.Ui_Dialog):
         
         if event.key() == QtCore.Qt.Key.Key_Escape:
             self.close()
+            
+        if event.key() == QtCore.Qt.Key.Key_F2:
+            self.radioButton.click()
+            self.spinBox_3.setFocus()
+        
+        if event.key() == QtCore.Qt.Key.Key_F3:
+            self.radioButton_2.click()
+            self.spinBox_3.setFocus()
+        
 
     def save(self):
         self.parent.cur.execute("""select * from product where id=?""",(self.id))

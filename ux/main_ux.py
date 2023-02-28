@@ -512,6 +512,21 @@ class Ui_MainWindow(object):
 "}")
         self.btn_print.setObjectName("btn_print")
         self.horizontalLayout_3.addWidget(self.btn_print)
+        self.btn_print_pos = QtWidgets.QPushButton(self.frame_7)
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.btn_print_pos.setFont(font)
+        self.btn_print_pos.setStyleSheet("QPushButton{\n"
+"    color:#fff;\n"
+"    background-color: rgb(53, 132, 228);\n"
+"}\n"
+"\n"
+"QPushButton:hover{\n"
+"    \n"
+"    background-color: rgb(98, 160, 234);\n"
+"}")
+        self.btn_print_pos.setObjectName("btn_print_pos")
+        self.horizontalLayout_3.addWidget(self.btn_print_pos)
         self.btn_save = QtWidgets.QPushButton(self.frame_7)
         font = QtGui.QFont()
         font.setPointSize(12)
@@ -1237,7 +1252,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Shop app"))
         self.btn_savdo.setText(_translate("MainWindow", "Сотув"))
         self.btn_client.setText(_translate("MainWindow", "Мижозлар"))
         self.btn_product.setText(_translate("MainWindow", "Махсулотлар"))
@@ -1278,6 +1293,7 @@ class Ui_MainWindow(object):
         self.btn_new.setText(_translate("MainWindow", "F5 Янгилаш"))
         self.btn_clear.setText(_translate("MainWindow", "F6 Тозалаш"))
         self.btn_print.setText(_translate("MainWindow", "F7 Печат"))
+        self.btn_print_pos.setText(_translate("MainWindow", "F8 Печат Пос"))
         self.btn_save.setText(_translate("MainWindow", "F2 Сақлаш"))
         self.label_8.setText(_translate("MainWindow", "Қидириш"))
         self.lineEdit_2.setPlaceholderText(_translate("MainWindow", "Қидириш..."))
