@@ -156,16 +156,25 @@ class ShopApp(QMainWindow, main_ux.Ui_MainWindow):
         row = self.tableWidget_4.currentRow()
         if row >= 0:
             id = self.tableWidget_4.item(row, 0).text()
+            client_id = self.tableWidget_4.item(row, 1).text()
             self.savdo_id = id
             self.basketList()
+            
             self.main_stack.setCurrentWidget(self.page_savdo)
+            index = self.comboBox.findData(client_id)
+            self.comboBox.setCurrentIndex(index)
+            self.lineEdit.setEnabled(False)
+            self.comboBox.setEnabled(False)
+            
             self.showSavdoButtons()
 
     def newSavdo(self):
         self.savdo_id = None
         self.basketList()
         self.showSavdoButtons()
-
+        self.lineEdit.setEnabled(True)
+        self.comboBox.setEnabled(True)
+        self.comboBox.setCurrentIndex(0)
     def clearBasket(self):
         if self.tableWidget.rowCount() > 0:
             reply = QMessageBox.question(self, 'Ўчириш', "Сиз саватчадаги барча махсулотларни ўчирмоқчимисиз?", QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
@@ -214,7 +223,7 @@ class ShopApp(QMainWindow, main_ux.Ui_MainWindow):
 
     def listSavdolar(self, value=None):
         if value is not None:
-            cur.execute("""select * from savdo where client like (?) or sana like (?) order by id desc""", (f"%{value}%",f"%{value}%"))
+            cur.execute("""select * from savdo where id=? or client like (?) or sana like (?) order by id desc""", (value,f"%{value}%",f"%{value}%"))
         else:
             cur.execute("""select * from savdo order by id desc""")
         

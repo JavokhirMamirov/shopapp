@@ -1,7 +1,7 @@
 from PyQt5.QtWidgets import QDialog, QMessageBox
 from ux import add_client_ux, edit_client_ux
 from PyQt5.QtCore import pyqtSignal
-import sqlite3
+from PyQt5 import QtCore
 
 class AddClientWindow(QDialog, add_client_ux.Ui_Dialog):
     closeapp = pyqtSignal(bool)
@@ -12,7 +12,13 @@ class AddClientWindow(QDialog, add_client_ux.Ui_Dialog):
         self.pushButton_6.clicked.connect(self.close)
         self.pushButton_7.clicked.connect(self.save)
 
-
+    def keyPressEvent(self,event):
+        if event.key() == QtCore.Qt.Key.Key_Enter or event.key() == QtCore.Qt.Key.Key_Return:
+            self.save()
+        
+        if event.key() == QtCore.Qt.Key.Key_Escape:
+            self.close()
+    
     def save(self):
         name = self.lineEdit_8.text()
         company = self.lineEdit_7.text()
@@ -38,6 +44,12 @@ class EditClientWindow(QDialog, edit_client_ux.Ui_Dialog):
         self.lineEdit_9.setText(data['phone'])
         self.lineEdit_8.setText(data['name'])
 
+    def keyPressEvent(self,event):
+        if event.key() == QtCore.Qt.Key.Key_Enter or event.key() == QtCore.Qt.Key.Key_Return:
+            self.save()
+        
+        if event.key() == QtCore.Qt.Key.Key_Escape:
+            self.close()
 
     def save(self):
         name = self.lineEdit_8.text()

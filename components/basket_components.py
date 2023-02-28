@@ -28,6 +28,9 @@ class AddBasketWindow(QDialog, add_basket.Ui_Dialog):
     def keyPressEvent(self, event):
         if event.key() == QtCore.Qt.Key.Key_Enter or QtCore.Qt.Key.Key_Return == event.key():
             self.save()
+        
+        if event.key() == QtCore.Qt.Key.Key_Escape:
+            self.close()
 
     def save(self):
         self.parent.cur.execute("""select * from product where id=?""",(self.id))
