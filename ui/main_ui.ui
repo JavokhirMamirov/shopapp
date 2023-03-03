@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>Shop app</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="../resources.qrc">
+    <normaloff>:/newPrefix/assets/savdo.png</normaloff>:/newPrefix/assets/savdo.png</iconset>
+  </property>
   <property name="styleSheet">
    <string notr="true"/>
   </property>
@@ -600,7 +604,7 @@ color:#fff;
                  </font>
                 </property>
                 <property name="text">
-                 <string>11,400</string>
+                 <string>0</string>
                 </property>
                </widget>
               </item>
@@ -656,7 +660,7 @@ color:#fff;
                  </font>
                 </property>
                 <property name="text">
-                 <string>12,540,600</string>
+                 <string>0</string>
                 </property>
                </widget>
               </item>
@@ -2361,7 +2365,7 @@ line-height: 40px;
 color: #FFFFFF;</string>
                   </property>
                   <property name="text">
-                   <string>11, 800 s</string>
+                   <string>0</string>
                   </property>
                  </widget>
                 </item>
@@ -2380,9 +2384,6 @@ line-height: 22px;
 color: #FFFFFF;
 text-align:right;
 </string>
-                  </property>
-                  <property name="text">
-                   <string>02.02.2023</string>
                   </property>
                   <property name="alignment">
                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -2445,7 +2446,7 @@ line-height: 40px;
 color: #FFFFFF;</string>
                   </property>
                   <property name="text">
-                   <string>11, 800 s</string>
+                   <string>0</string>
                   </property>
                  </widget>
                 </item>
@@ -2464,9 +2465,6 @@ line-height: 22px;
 color: #FFFFFF;
 text-align:right;
 </string>
-                  </property>
-                  <property name="text">
-                   <string>02.02.2023</string>
                   </property>
                   <property name="alignment">
                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>

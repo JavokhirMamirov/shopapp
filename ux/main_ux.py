@@ -15,6 +15,9 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1366, 720)
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(":/newPrefix/assets/savdo.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        MainWindow.setWindowIcon(icon)
         MainWindow.setStyleSheet("")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
@@ -1262,9 +1265,9 @@ class Ui_MainWindow(object):
         self.lineEdit.setPlaceholderText(_translate("MainWindow", "Қидириш..."))
         self.label_3.setText(_translate("MainWindow", "Мижоз"))
         self.label_4.setText(_translate("MainWindow", "Доллор курси"))
-        self.label_5.setText(_translate("MainWindow", "11,400"))
+        self.label_5.setText(_translate("MainWindow", "0"))
         self.label_6.setText(_translate("MainWindow", "Умумий сумма"))
-        self.label_7.setText(_translate("MainWindow", "12,540,600"))
+        self.label_7.setText(_translate("MainWindow", "0"))
         item = self.tableWidget.horizontalHeaderItem(0)
         item.setText(_translate("MainWindow", "id"))
         item = self.tableWidget.horizontalHeaderItem(1)
@@ -1348,11 +1351,9 @@ class Ui_MainWindow(object):
         self.label_17.setText(_translate("MainWindow", "Доллор курси"))
         self.pushButton_7.setText(_translate("MainWindow", "+"))
         self.label_18.setText(_translate("MainWindow", "Хозирги курс"))
-        self.label_20.setText(_translate("MainWindow", "11, 800 s"))
-        self.label_21.setText(_translate("MainWindow", "02.02.2023"))
+        self.label_20.setText(_translate("MainWindow", "0"))
         self.label_19.setText(_translate("MainWindow", "Эски курс"))
-        self.label_23.setText(_translate("MainWindow", "11, 800 s"))
-        self.label_22.setText(_translate("MainWindow", "02.02.2023"))
+        self.label_23.setText(_translate("MainWindow", "0"))
 import resources_rc
 
 

@@ -1,4 +1,4 @@
-import sys
+import sys, os
 from PyQt5.QtWidgets import QMainWindow, QApplication, QPushButton, QMessageBox
 from ux import main_ux
 from libs.extra_functions import MENU_SELECTED_STYLESHEET, InsertItemToTable, TableStretchAndHide, ClearTableWidget
@@ -10,7 +10,8 @@ import datetime
 from PyQt5 import QtPrintSupport
 from PyQt5.QtWebEngineWidgets import QWebEngineView
 #create a database or connect
-conn = sqlite3.connect('store.db')
+os.makedirs('C:\storedb', exist_ok=True)
+conn = sqlite3.connect('C:\storedb\store.db')
 cur = conn.cursor()
 DataBaseTableCreate(cur)
 
@@ -174,8 +175,7 @@ class ShopApp(QMainWindow, main_ux.Ui_MainWindow):
                         </head>
                         <body style="margin:0px">
                             <h3 style="text-align:center;">106</h3>
-                            <h4 style="text-align:center;">Firma nomi</h4>
-                            <h5 style="text-align:center;">9895665652</h5>
+                            <h5 style="text-align:center;">+998911670733</h5>
                             <h5>Мижоз: """+str(client[1])+"""</h5>
                             <h5>Телефон: """+str(client[3])+"""</h5>
                             <h5>Сана: """+str(savdo[4])+"""</h5>
@@ -273,13 +273,12 @@ class ShopApp(QMainWindow, main_ux.Ui_MainWindow):
                                         <h4>Сана: """+str(savdo[4])+"""</h4>
                                     </td>
                                     <td>
-                                        <h3 style="text-align:center;">106</h3>
+                                        <h2 style="text-align:center;">106</h2>
                                         <h3 style="text-align:center;">Чек № """+str(savdo[0])+"""</h3>
                                     </td>
                                     <td >
-                                        <h4 style="text-align:right">Мижоз: """+str(client[1])+"""</h4>
-                                        <h4 style="text-align:right">Телефон: """+str(client[3])+"""</h4>
-                                        <h4 style="text-align:right">Сана: """+str(savdo[4])+"""</h4>
+                                        <h4 style="text-align:right">106</h4>
+                                        <h4 style="text-align:right">+998911670733</h4>
                                     </td>
                                 </tr>
                             </table>
@@ -651,7 +650,11 @@ class ShopApp(QMainWindow, main_ux.Ui_MainWindow):
         
         if event.key() ==  QtCore.Qt.Key.Key_F8:
             if self.main_stack.currentWidget() == self.page_savdo and self.btn_print_pos.isVisible():
-                self.openPosPrintWindow()
+                self.printPerviewPos()
+        
+        if event.key() ==  QtCore.Qt.Key.Key_F7:
+            if self.main_stack.currentWidget() == self.page_savdo and self.btn_print.isVisible():
+                self.printPerview()
 
 
     def searchSavdoProduct(self, value):
@@ -687,8 +690,10 @@ class ShopApp(QMainWindow, main_ux.Ui_MainWindow):
         try:
             cur.execute("""select * from dollor""")
             row = cur.fetchone()
-            self.label_23.setText(f"{row[3]:,} Сўм" )
-            self.label_22.setText(str(row[4]))
+            if row[3] is not None:
+                self.label_23.setText(f"{row[3]:,} Сўм" )
+            if row[4] is not None:
+                self.label_22.setText(str(row[4]))
             self.label_20.setText(f"{row[1]:,} Сўм")
             self.label_21.setText(str(row[2]))
             self.label_5.setText(f"{row[1]:,} Сўм")
@@ -696,7 +701,7 @@ class ShopApp(QMainWindow, main_ux.Ui_MainWindow):
             msg = QMessageBox()
             msg.setIcon(QMessageBox.Critical)
             msg.setText("Error")
-            msg.setInformativeText(f"{err}")
+            msg.setInformativeText(f"Илтимос дастур яхши ишлаши учун доллор курсини киритиб олин")
             msg.setWindowTitle("Error")
             msg.exec_()
 
@@ -859,6 +864,7 @@ class ShopApp(QMainWindow, main_ux.Ui_MainWindow):
                     actionButtons
                 ]
                 InsertItemToTable(self.tableWidget_3, data['row'], lists, list_widget=[8] )
+                self.setClientComboboxItems()
         except Exception as err:
             msg = QMessageBox()
             msg.setIcon(QMessageBox.Critical)
@@ -1029,6 +1035,7 @@ class ShopApp(QMainWindow, main_ux.Ui_MainWindow):
             if refresh:
                 ClearTableWidget(self.tableWidget_2)
                 self.listClient()
+                self.setClientComboboxItems()
         except Exception as err:
             msg = QMessageBox()
             msg.setIcon(QMessageBox.Critical)
