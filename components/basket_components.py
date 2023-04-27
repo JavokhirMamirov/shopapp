@@ -17,7 +17,7 @@ class AddBasketWindow(QDialog, add_basket.Ui_Dialog):
         self.spinBox_3.selectAll()
         self.setdata()
     def setdata(self):
-        self.parent.cur.execute("""select * from product where id=?""",(self.id))
+        self.parent.cur.execute("""select * from product where id=?""",[self.id])
         data = self.parent.cur.fetchone()
         self.lineEdit_8.setText(str(data[1]))
         self.lineEdit_9.setText(str(data[3]))
@@ -43,7 +43,7 @@ class AddBasketWindow(QDialog, add_basket.Ui_Dialog):
         
 
     def save(self):
-        self.parent.cur.execute("""select * from product where id=?""",(self.id))
+        self.parent.cur.execute("""select * from product where id=?""",[self.id])
         data = self.parent.cur.fetchone()
         self.parent.cur.execute("""select * from dollor""")
         dollor = self.parent.cur.fetchone()
@@ -64,7 +64,7 @@ class AddBasketWindow(QDialog, add_basket.Ui_Dialog):
             self.parent.cur.execute("""select * from basket where (product_id=? and savdo_id=?)""", (self.id, self.parent.savdo_id))
             self.parent.conn.commit()
         else:
-            self.parent.cur.execute("""select * from basket where (product_id=? and savdo_id IS NULL)""", (self.id))
+            self.parent.cur.execute("""select * from basket where (product_id=? and savdo_id IS NULL)""", [self.id])
             self.parent.conn.commit()
         pro = self.parent.cur.fetchone()
         if pro is not None:

@@ -117,7 +117,8 @@ class ShopApp(QMainWindow, main_ux.Ui_MainWindow):
             document.setDocumentMargin(1)
             cur.execute("""select * from savdo where id=?""", (self.savdo_id,))
             savdo = cur.fetchone()
-
+            cur.execute("""select * from dollor""")
+            dollor = cur.fetchone()
             cur.execute("""select * from client where id=?""", (savdo[1],))
             client = cur.fetchone()
             if self.savdo_id is not None:
@@ -130,7 +131,7 @@ class ShopApp(QMainWindow, main_ux.Ui_MainWindow):
             html_tr=""
             for dt in data:
                 total_summa += dt[11]
-                html_tr += f"<tr><td>{dt[3]}</td><td>{dt[4]}</td><td>{dt[5]}</td><td>{dt[6]}</td><td>{dt[10]}<hr>{dt[7]}</td><td>{dt[9]:,}</td></tr>"
+                html_tr += f"<tr><td>{dt[3]}</td><td>{dt[4]}</td><td>{dt[5]}</td><td>{dt[6]}</td><td>{dt[10]}<hr>{dt[7]}</td><td>{dt[9]:,}<hr>${dt[8]:,}</td></tr>"
                 i += 1
             if self.savdo_id is not None:
                 cur.execute("""update savdo set summa=? where id=?""",(self.total_summa, self.savdo_id))
@@ -179,6 +180,7 @@ class ShopApp(QMainWindow, main_ux.Ui_MainWindow):
                             <h5>Мижоз: """+str(client[1])+"""</h5>
                             <h5>Телефон: """+str(client[3])+"""</h5>
                             <h5>Сана: """+str(savdo[4])+"""</h5>
+                            <h5>$1 = """+str(f"{dollor[1]:,}")+""" Сум</h5>
                             <br>
                             <h3 style="text-align:center;">Чек № """+str(savdo[0])+"""</h3>
                             <br>
@@ -219,21 +221,30 @@ class ShopApp(QMainWindow, main_ux.Ui_MainWindow):
 
             cur.execute("""select * from client where id=?""", (savdo[1],))
             client = cur.fetchone()
+            
+            cur.execute("""select * from dollor""")
+            
+            dollor = cur.fetchone()
+            
             if self.savdo_id is not None:
                 cur.execute("""select * from basket where savdo_id=?;""",(self.savdo_id,))
             else:
                 cur.execute("""select * from basket where savdo_id IS NULL;""")
+            
             data = cur.fetchall()
+            
+            
             i = 0
             total_summa = 0
             html_tr=""
             for dt in data:
                 total_summa += dt[11]
-                html_tr += f"<tr><td>{i+1}</td><td>{dt[3]}</td><td>{dt[4]}</td><td>{dt[5]}</td><td>{dt[6]}</td><td>{dt[7]}</td><td>{dt[10]}</td><td>{dt[9]:,}</td><td>{dt[11]:,}</td></tr>"
+                html_tr += f"<tr><td>{i+1}</td><td>{dt[3]}</td><td>{dt[4]}</td><td>{dt[5]}</td><td>{dt[6]}</td><td>{dt[7]}</td><td>{dt[10]}</td><td>{dt[8]:,}</td><td>{dt[9]:,}</td></tr>"
                 i += 1
             if self.savdo_id is not None:
                 cur.execute("""update savdo set summa=? where id=?""",(self.total_summa, self.savdo_id))
                 conn.commit()
+            
             html = """<html>
                         <head>
                             <style>
@@ -277,6 +288,7 @@ class ShopApp(QMainWindow, main_ux.Ui_MainWindow):
                                         <h3 style="text-align:center;">Чек № """+str(savdo[0])+"""</h3>
                                     </td>
                                     <td >
+                                        <h3 style="text-align:right">$1="""+str(f"{dollor[1]:,}")+""" Сум</h3>
                                         <h4 style="text-align:right">106</h4>
                                         <h4 style="text-align:right">+998911670733</h4>
                                     </td>
@@ -291,8 +303,8 @@ class ShopApp(QMainWindow, main_ux.Ui_MainWindow):
                                     <th>Ишлаб чиқарувчи</th>
                                     <th>Бирлиги</th>
                                     <th>Сони</th>
+                                    <th>$</th>
                                     <th>Нархи</th>
-                                    <th>Сумма</th>
                                 </tr>"""+html_tr+"""
                                 <tr>
                                     <td></td>
@@ -356,7 +368,7 @@ class ShopApp(QMainWindow, main_ux.Ui_MainWindow):
                 
                 if reply == QMessageBox.Yes:
                     if self.savdo_id is not None:
-                        cur.execute("""delete from basket where savdo_id=?""",(self.savdo_id,))
+                        cur.execute("""delete from basket where savdo_id=?""",[self.savdo_id])
                     else:
                         cur.execute("""delete from basket where savdo_id is null""")
                     conn.commit()
@@ -566,7 +578,7 @@ class ShopApp(QMainWindow, main_ux.Ui_MainWindow):
             row = self.tableWidget.currentRow()
             if row >= 0:
                 id = self.tableWidget.item(row, 0).text()
-                cur.execute("""delete from basket where id=?""",(id))
+                cur.execute("""delete from basket where id=?""",[id])
                 conn.commit()
                 self.basketList()
         except Exception as err:
@@ -832,7 +844,7 @@ class ShopApp(QMainWindow, main_ux.Ui_MainWindow):
             reply = QMessageBox.question(self, 'Ўчириш', "Сиз ушбу махсулотни ўчирмоқчимисиз?", QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
             
             if reply == QMessageBox.Yes:
-                cur.execute("""delete from product where id=?""", id)
+                cur.execute("""delete from product where id=?""", [id])
                 conn.commit()
                 ClearTableWidget(self.tableWidget_3)
                 self.listProducts()
@@ -988,7 +1000,7 @@ class ShopApp(QMainWindow, main_ux.Ui_MainWindow):
             reply = QMessageBox.question(self, 'Ўчириш', "Сиз ушбу мижозни ўчирмоқчимисиз?", QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
             
             if reply == QMessageBox.Yes:
-                cur.execute("""delete from client where id=?""", id)
+                cur.execute("""delete from client where id=?""", [id])
                 conn.commit()
                 ClearTableWidget(self.tableWidget_2)
                 self.listClient()
