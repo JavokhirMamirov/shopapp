@@ -423,9 +423,9 @@ class ShopApp(QMainWindow, main_ux.Ui_MainWindow):
     def listSavdolar(self, value=None):
         try:
             if value is not None:
-                cur.execute("""select * from savdo where id=? or client like (?) or sana like (?) order by id desc""", (value,f"%{value}%",f"%{value}%"))
+                cur.execute("""select * from savdo where id=? or client like (?) or sana like (?) order by id desc limit 100 """, (value,f"%{value}%",f"%{value}%"))
             else:
-                cur.execute("""select * from savdo order by id desc""")
+                cur.execute("""select * from savdo order by id desc limit 100""")
             
             data = cur.fetchmany(250)
             i = 0
@@ -742,7 +742,7 @@ class ShopApp(QMainWindow, main_ux.Ui_MainWindow):
     
     def listProducts(self):
         try:
-            cur.execute("""select * from product""")
+            cur.execute("""select * from product limit 100""")
             data = cur.fetchall()
             i = 0
             for dt in data:
@@ -772,29 +772,31 @@ class ShopApp(QMainWindow, main_ux.Ui_MainWindow):
             msg.exec_()
 
     def searchProduct(self, value):
+       
         try:
-            cur.execute("""select * from product where (name like (?) or brend like (?) or model like (?) or factory like (?) )""", (f"%{value}%", f"%{value}%", f"%{value}%", f"%{value}%"))
-            data = cur.fetchall()
-            ClearTableWidget(self.tableWidget_3)
-            i = 0
-            for dt in data:
-                actionButtons = action_button.ActionButtons(edit=True, delete=True)
-                actionButtons.btn_edit.clicked.connect(self.productEditClick)
-                actionButtons.btn_delete.clicked.connect(self.productDeleteClick)
-                lists = [
-                    dt[0],
-                    i+1,
-                    dt[1],
-                    dt[2],
-                    dt[3],
-                    dt[4],
-                    dt[5],
-                    dt[6],
-                    actionButtons,
-                ]
-                self.tableWidget_3.insertRow(i)
-                InsertItemToTable(self.tableWidget_3, i, lists, list_widget=[8])
-                i += 1
+            if len(value) > 2 or value == "":
+                cur.execute("""select * from product where (name like (?) or brend like (?) or model like (?) or factory like (?)) limit 100""", (f"%{value}%", f"%{value}%", f"%{value}%", f"%{value}%"))
+                data = cur.fetchall()
+                ClearTableWidget(self.tableWidget_3)
+                i = 0
+                for dt in data:
+                    actionButtons = action_button.ActionButtons(edit=True, delete=True)
+                    actionButtons.btn_edit.clicked.connect(self.productEditClick)
+                    actionButtons.btn_delete.clicked.connect(self.productDeleteClick)
+                    lists = [
+                        dt[0],
+                        i+1,
+                        dt[1],
+                        dt[2],
+                        dt[3],
+                        dt[4],
+                        dt[5],
+                        dt[6],
+                        actionButtons,
+                    ]
+                    self.tableWidget_3.insertRow(i)
+                    InsertItemToTable(self.tableWidget_3, i, lists, list_widget=[8])
+                    i += 1
         except Exception as err:
             msg = QMessageBox()
             msg.setIcon(QMessageBox.Critical)
@@ -914,7 +916,7 @@ class ShopApp(QMainWindow, main_ux.Ui_MainWindow):
 
     def searchClient(self, value):
         try:
-            cur.execute("""select * from client where (name like (?) or company like (?) or phone like (?) )""", (f"%{value}%", f"%{value}%", f"%{value}%"))
+            cur.execute("""select * from client where (name like (?) or company like (?) or phone like (?)) limit 100 """, (f"%{value}%", f"%{value}%", f"%{value}%"))
             data = cur.fetchall()
             ClearTableWidget(self.tableWidget_2)
             i = 0
